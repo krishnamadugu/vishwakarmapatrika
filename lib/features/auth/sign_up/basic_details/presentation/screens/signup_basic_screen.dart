@@ -75,7 +75,7 @@ class SignUpBasicScreen extends StatelessWidget {
                     Expanded(
                       child: DropdownMenu<String>(
                         hintText: "Select your sub caste",
-                        menuStyle: MenuStyle(),
+                        menuStyle: const MenuStyle(),
                         width: screenWidth * 0.4,
                         onSelected: (String? value) {},
                         dropdownMenuEntries:
