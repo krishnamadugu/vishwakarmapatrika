@@ -12,7 +12,7 @@ class SignUpBasicScreen extends StatelessWidget {
   final TextEditingController birthPlaceController = TextEditingController();
   final TextEditingController occupationController = TextEditingController();
   final TextEditingController hobbiesController = TextEditingController();
-  final List<String> list = ['item 1', 'item 2', 'item 3', 'item 4'];
+  final List<String> list = ['item 1', 'item 2', 'item 3', 'item 4', 'Item 5'];
 
   @override
   Widget build(BuildContext context) {
