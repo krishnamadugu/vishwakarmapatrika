@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_up/basic_details/presentation/screens/signup_basic_screen.dart';
+import 'package:vishwakarmapatrika/features/auth/sign_up/contact_details/presentation/page/signup_contact_screen.dart';
+import 'package:vishwakarmapatrika/features/auth/sign_up/family_details/presentation/page/signup_family_screen.dart';
+import 'package:vishwakarmapatrika/features/auth/sign_up/password_details/presentation/page/signup_password_screen.dart';
 import '../../features/error/error_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import 'app_routes.dart';
@@ -19,6 +22,18 @@ class RouteHandler {
       case AppRoutes.signUpScreen1:
         return MaterialPageRoute(
           builder: (signUpBasicScreenContext) => SignUpBasicScreen(),
+        );
+      case AppRoutes.signUpScreen2:
+        return MaterialPageRoute(
+          builder: (signUpBasicScreenContext) => SignUpFamilyScreen(),
+        );
+      case AppRoutes.signUpScreen3:
+        return MaterialPageRoute(
+          builder: (signUpBasicScreenContext) => SignUpContactScreen(),
+        );
+      case AppRoutes.signUpScreen4:
+        return MaterialPageRoute(
+          builder: (signUpBasicScreenContext) => SingUpPasswordScreen(),
         );
       default:
         return MaterialPageRoute(
