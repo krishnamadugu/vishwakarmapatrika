@@ -1,0 +1,54 @@
+name: vishwakarmapatrika
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_bloc: any
+  easy_splash_screen: any
+  cached_network_image: any
+  intl: any
+  go_router: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+  fonts:
+    - family: Source Sans 3
+      fonts:
+        - asset: assets/fonts/Source_Sans_3 /static/SourceSans3-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Source_Sans_3 /static/SourceSans3-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Source_Sans_3 /static/SourceSans3-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Source_Sans_3 /static/SourceSans3-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Source_Sans_3 /static/SourceSans3-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Source_Sans_3 /static/SourceSans3-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Source_Sans_3 /static/SourceSans3-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Source_Sans_3 /static/SourceSans3-Black.ttf
+          weight: 900
+  
+  
+  
