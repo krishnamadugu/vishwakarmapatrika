@@ -6,6 +6,35 @@ class ThemeConstants {
   static Color txtColor = AppColors.black;
   static const String appFontFamily = 'Source Sans 3';
 
+  //inputDecorationTheme
+  static const inputDecorationTheme = InputDecorationTheme(
+    focusedErrorBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: AppColors.primaryColor,
+      ),
+    ),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: AppColors.primaryColor,
+      ),
+    ),
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: AppColors.primaryColor,
+      ),
+    ),
+    border: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: AppColors.primaryColor,
+      ),
+    ),
+    disabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: AppColors.primaryColor,
+      ),
+    ),
+  );
+
   //textTheme
   static TextTheme textTheme = TextTheme(
     displayLarge: TextStyle(

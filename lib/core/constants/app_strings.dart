@@ -48,4 +48,14 @@ class AppStrings {
   static const String txtUnMarriedSisters = "Unmarried Sisters if any";
   static const String txtFinalStep = "Final Step";
   static const String txtFinishSignup = "Finish Signup";
+
+  //forgot password string values
+  static const String txtForgotYourPassword = "Forgot Your Password";
+  static const String txtSubmit = "Submit";
+  static const String txtPleaseEnterOtp = "Please Enter OTP";
+  static const String txtDontGetTheOtp = "Didn’t get the OTP? ";
+  static const String txtResendOtp = "Resend OTP";
+  static const String txtRecoverAccount = "Recover your account";
+  static const String txtNewPassword = "Enter  new  password";
+  static const String txtConfirmPassword = "confirm your password";
 }

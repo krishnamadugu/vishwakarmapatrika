@@ -1,28 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
+
 import '../../../../../../config/route/app_routes.dart';
 import '../../../../../../core/constants/app_strings.dart';
 import '../../../../../../core/constants/theme/border_radii.dart';
+import '../../../../../../core/utils/shared/shared_methods.dart';
 import '../../../../../../core/utils/shared/shared_widgets.dart';
-import '../../../../../../core/utils/validator/validators.dart';
+import '../../../verify_otp/presentation/widgets/otp_header_widget.dart';
 
-class SingUpPasswordScreen extends StatelessWidget {
-  SingUpPasswordScreen({super.key});
-  final TextEditingController passwordController = TextEditingController();
+class NewPasswordScreen extends StatelessWidget {
+  NewPasswordScreen({super.key});
+  final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  final signUpFamilyFormKey = GlobalKey<FormState>();
+  final newPasswordFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
+    bool obsVal = false;
 
-    signUpBtnPasswordTapped() {
-      if (signUpFamilyFormKey.currentState!.validate()) {
+    forgotPasswordBtnPasswordTapped() {
+      if (newPasswordFormKey.currentState!.validate()) {
         Navigator.pushNamedAndRemoveUntil(
           context,
-          AppRoutes.homeScreen,
+          AppRoutes.loginScreen,
           (Route<dynamic> route) => false,
         );
       }
@@ -36,25 +40,36 @@ class SingUpPasswordScreen extends StatelessWidget {
           margin: const EdgeInsets.all(BorderRadii.size_20),
           child: SingleChildScrollView(
             child: Form(
-              key: signUpFamilyFormKey,
+              key: newPasswordFormKey,
               child: Column(
                 children: [
-                  SignUpHeaderWidget(
-                    headerText: AppStrings.txtFinalStep,
+                  OtpHeaderWidget(
                     textTheme: textTheme,
+                    screenWidth: screenWidth * 1.2,
+                    otpHeaderText: AppStrings.txtRecoverAccount,
                   ),
                   const SizedBox(
-                    height: BorderRadii.size_50,
+                    height: BorderRadii.size_80,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: BorderRadii.size_10,
                     ),
                     child: SharedTextFieldWidget(
-                      textEditingController: passwordController,
+                      obsTxtVal: obsVal,
+                      suffixIconWidget: IconButton(
+                        padding:
+                            const EdgeInsets.only(right: BorderRadii.size_24),
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.remove_red_eye,
+                          color: AppColors.black.withOpacity(0.3),
+                        ),
+                      ),
+                      textEditingController: newPasswordController,
                       textTheme: textTheme,
-                      hintTxt: AppStrings.txtEnterFatherName,
-                      validatorFunction: Validator().validatePassword,
+                      hintTxt: AppStrings.txtNewPassword,
+                      validatorFunction: sharedValidatorFunc,
                     ),
                   ),
                   const SizedBox(
@@ -65,21 +80,31 @@ class SingUpPasswordScreen extends StatelessWidget {
                       horizontal: BorderRadii.size_10,
                     ),
                     child: SharedTextFieldWidget(
+                      obsTxtVal: obsVal,
+                      suffixIconWidget: IconButton(
+                        padding:
+                            const EdgeInsets.only(right: BorderRadii.size_24),
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.remove_red_eye,
+                          color: AppColors.black.withOpacity(0.3),
+                        ),
+                      ),
                       textEditingController: confirmPasswordController,
                       textTheme: textTheme,
-                      hintTxt: AppStrings.txtEnterMotherName,
-                      validatorFunction: Validator().validatePassword,
+                      hintTxt: AppStrings.txtConfirmPassword,
+                      validatorFunction: sharedValidatorFunc,
                     ),
                   ),
                   const SizedBox(
-                    height: BorderRadii.size_40,
+                    height: BorderRadii.size_80,
                   ),
                   InkWell(
-                    onTap: signUpBtnPasswordTapped,
+                    onTap: forgotPasswordBtnPasswordTapped,
                     child: SharedActionButtonWidget(
                       screenWidth: screenWidth,
                       textTheme: textTheme,
-                      btnText: AppStrings.txtFinishSignup,
+                      btnText: AppStrings.txtSubmit,
                     ),
                   ),
                 ],

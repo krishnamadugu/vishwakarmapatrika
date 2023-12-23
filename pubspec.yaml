@@ -20,6 +20,7 @@ dependencies:
   go_router: any
   dropdown_button2: any
   image_picker: any
+  pin_code_fields: any
 
 dev_dependencies:
   flutter_test:

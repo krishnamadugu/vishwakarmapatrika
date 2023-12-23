@@ -21,3 +21,11 @@ OutlineInputBorder inputTextFieldBorder() {
     ),
   );
 }
+
+UnderlineInputBorder buildUnderlineInputBorder() {
+  return const UnderlineInputBorder(
+    borderSide: BorderSide(
+      color: AppColors.primaryColor,
+    ),
+  );
+}
