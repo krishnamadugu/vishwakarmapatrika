@@ -1,6 +1,8 @@
 class FontSizes {
   static const double size_8 = 8.0;
+  static const double size_10 = 10.0;
   static const double size_12 = 12.0;
+  static const double size_13 = 13.0;
   static const double size_14 = 14.0;
   static const double size_16 = 16.0;
   static const double size_18 = 18.0;

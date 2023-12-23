@@ -4,9 +4,9 @@ import 'package:vishwakarmapatrika/core/constants/app_images.dart';
 import 'package:vishwakarmapatrika/core/constants/app_strings.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/border_radii.dart';
+import '../../../../../core/utils/shared/shared_widgets.dart';
 import '../widgets/forgot_pwd_widget.dart';
 import '../widgets/input_txtfield_widget.dart';
-import '../widgets/signin_btn_widget.dart';
 import '../widgets/signup_option_widget.dart';
 import '../widgets/welcome_message.dart';
 
@@ -102,9 +102,10 @@ class SignInScreen extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: signInBtnPasswordTapped,
-                              child: SignInBtnWidget(
+                              child: SharedActionButtonWidget(
                                 screenWidth: screenWidth,
                                 textTheme: textTheme,
+                                btnText: AppStrings.txtSignIn,
                               ),
                             ),
                             const SizedBox(
