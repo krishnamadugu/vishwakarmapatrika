@@ -7,7 +7,6 @@ import 'package:vishwakarmapatrika/core/constants/theme/border_radii.dart';
 import '../../../../../core/utils/shared/shared_widgets.dart';
 import '../widgets/forgot_pwd_widget.dart';
 import '../widgets/input_txtfield_widget.dart';
-import '../widgets/signup_option_widget.dart';
 import '../widgets/welcome_message.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -25,7 +24,11 @@ class SignInScreen extends StatelessWidget {
 
     signInBtnPasswordTapped() {
       if (signinFormKey.currentState!.validate()) {
-        Navigator.pushNamed(context, AppRoutes.homeScreen);
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          AppRoutes.homeScreen,
+          (Route<dynamic> route) => false,
+        );
       }
     }
 
@@ -33,7 +36,9 @@ class SignInScreen extends StatelessWidget {
       Navigator.pushNamed(context, AppRoutes.signUpScreen1);
     }
 
-    forgotPasswordTapped() {}
+    forgotPasswordTapped() {
+      Navigator.pushNamed(context, AppRoutes.forgotPasswordScreen);
+    }
 
     return Container(
       width: screenWidth,
@@ -112,11 +117,13 @@ class SignInScreen extends StatelessWidget {
                               height: BorderRadii.size_8,
                             ),
                             InkWell(
-                              child: SignUpOptionWidget(
+                              child: SharedRichTextWidget(
+                                text1: AppStrings.txtDontHaveAccount,
+                                text2: AppStrings.txtSignUp,
                                 textTheme: textTheme,
                                 signUpOptionTapped: signUpBtnTapped,
                               ),
-                            )
+                            ),
                           ],
                         )
                       ],

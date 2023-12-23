@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/border_radii.dart';
@@ -9,16 +10,22 @@ import '../../constants/app_strings.dart';
 class SharedTextFieldWidget extends StatelessWidget {
   const SharedTextFieldWidget({
     super.key,
+    this.suffixIconWidget = const SizedBox(
+      width: 0,
+    ),
     required this.textEditingController,
     required this.validatorFunction,
     required this.textTheme,
     required this.hintTxt,
+    this.obsTxtVal = false,
   });
 
   final TextEditingController textEditingController;
   final String? Function(String?)? validatorFunction;
   final TextTheme textTheme;
   final String hintTxt;
+  final Widget suffixIconWidget;
+  final bool obsTxtVal;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +35,7 @@ class SharedTextFieldWidget extends StatelessWidget {
       style: textTheme.labelSmall?.copyWith(
         fontSize: FontSizes.size_20,
       ),
+      obscureText: obsTxtVal,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           vertical: BorderRadii.size_18,
@@ -54,9 +62,99 @@ class SharedTextFieldWidget extends StatelessWidget {
         enabledBorder: inputTextFieldBorder(),
         errorBorder: inputTextFieldBorder(),
         focusedBorder: inputTextFieldBorder(),
-        suffixIcon: const SizedBox(
-          width: 0,
+        suffixIcon: suffixIconWidget,
+      ),
+    );
+  }
+}
+
+class ForgotPasswordHeaderWidget extends StatelessWidget {
+  const ForgotPasswordHeaderWidget({
+    super.key,
+    required this.textTheme,
+    required this.headerText,
+  });
+
+  final TextTheme textTheme;
+  final String headerText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Row(
+            children: [
+              const Icon(
+                Icons.navigate_before,
+                size: 26.0,
+              ),
+              Text(
+                AppStrings.txtBack,
+                style: textTheme.titleMedium?.copyWith(
+                  fontSize: FontSizes.size_20,
+                ),
+              ),
+            ],
+          ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(left: 20.0, top: 10.0),
+          child: Text(
+            headerText,
+            style: textTheme.titleLarge?.copyWith(
+              color: AppColors.primaryColor,
+              fontSize: FontSizes.size_42,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SharedRichTextWidget extends StatelessWidget {
+  const SharedRichTextWidget({
+    super.key,
+    required this.textTheme,
+    required this.signUpOptionTapped,
+    required this.text1,
+    required this.text2,
+  });
+
+  final TextTheme textTheme;
+  final void Function()? signUpOptionTapped;
+  final String text1;
+  final String text2;
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: text1,
+            style: textTheme.bodySmall?.copyWith(
+              fontSize: FontSizes.size_18,
+              color: AppColors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          TextSpan(
+            text: text2,
+            recognizer: TapGestureRecognizer()..onTap = signUpOptionTapped,
+            style: textTheme.bodySmall?.copyWith(
+              fontSize: FontSizes.size_18,
+              color: AppColors.primaryColor,
+              fontWeight: FontWeight.w400,
+              decoration: TextDecoration.none,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -350,12 +448,12 @@ class SharedSignUpDropDownWidget extends StatelessWidget {
           ),
           items: items
               .map((String item) => DropdownMenuItem<String>(
-            value: item,
-            child: Text(
-              item,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ))
+                    value: item,
+                    child: Text(
+                      item,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ))
               .toList(),
           value: selectedValue,
           onChanged: (value) {},

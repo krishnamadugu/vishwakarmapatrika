@@ -1,4 +1,5 @@
 class BorderRadii {
+  static const double size_5 = 5.0;
   static const double size_6 = 6.0;
   static const double size_8 = 8.0;
   static const double size_10 = 10.0;
@@ -20,4 +21,5 @@ class BorderRadii {
   static const double size_42 = 42.0;
   static const double size_50 = 50.0;
   static const double size_58 = 58.0;
+  static const double size_80 = 80.0;
 }
