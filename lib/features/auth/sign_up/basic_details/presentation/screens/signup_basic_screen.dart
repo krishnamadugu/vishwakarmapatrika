@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_up/basic_details/presentation/cubit/signup_basic_cubit.dart';
-import '../../../../../../config/route/app_routes.dart';
 import '../../../../../../core/constants/app_strings.dart';
 import '../../../../../../core/constants/theme/border_radii.dart';
 import '../../../../../../core/utils/shared/shared_methods.dart';
