@@ -50,6 +50,19 @@ class AppStrings {
   static const String txtFinishSignup = "Finish Signup";
   static const String txtUploadCamera = 'Upload from camera';
   static const String txtUploadGallery = 'Upload from gallery';
+  static const String txtRequestSubCaste = 'Please choose your sub caste';
+  static const String txtRequestGender = 'Please choose your gender';
+  static const String txtRequestDOB = 'Please choose your date of birth';
+  static const String txtRequestBirthTime = 'Please choose your birth time';
+  static const String txtRequestBirthPlace = 'Please choose your birth place';
+  static const String txtRequestManglikStatus =
+      'Please choose your Manglik Status';
+  static const String txtRequestCreatedBy = 'Please choose profile created by';
+  static const String txtRequestMaritalStatus =
+      'Please choose your Marital Status';
+  static const String txtRequestEducation =
+      'Please choose your Education Level';
+  static const String txtRequestImgUrl = 'Please provide your profile picture';
 
   //forgot password string values
   static const String txtForgotYourPassword = "Forgot Your Password";

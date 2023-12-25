@@ -17,13 +17,7 @@ class SignUpBasicScreen extends StatelessWidget {
   final TextEditingController birthPlaceController = TextEditingController();
   final TextEditingController occupationController = TextEditingController();
   final TextEditingController hobbiesController = TextEditingController();
-  final List<String> items = [
-    "Item 1 ",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5"
-  ];
+  final List<String> items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
   final signUpFormKey = GlobalKey<FormState>();
 
   @override
@@ -32,11 +26,25 @@ class SignUpBasicScreen extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
     final signupBasicCubit = BlocProvider.of<SignupBasicCubit>(context);
-    String? selectedValue;
+    String? userSelectedSubCasteValue;
+    String? userSelectedGenderValue;
+    String? userSelectedManglikStatusValue;
+    String? userSelectedMaritalStatusValue;
+    String? userSelectedCreatedByValue;
+    String? userSelectedEducationValue;
 
     signUpBtnPasswordTapped() {
       if (signUpFormKey.currentState!.validate()) {
-        Navigator.pushNamed(context, AppRoutes.signUpScreen2);
+        BlocProvider.of<SignupBasicCubit>(context)
+            .userName(fullNameController.text);
+        BlocProvider.of<SignupBasicCubit>(context)
+            .userBirthPlace(birthPlaceController.text);
+        BlocProvider.of<SignupBasicCubit>(context)
+            .userOccupation(occupationController.text);
+        BlocProvider.of<SignupBasicCubit>(context)
+            .userHobbies(hobbiesController.text);
+        BlocProvider.of<SignupBasicCubit>(context)
+            .signUpBasicValidation(context);
       }
     }
 
@@ -126,9 +134,16 @@ class SignUpBasicScreen extends StatelessWidget {
                               textTheme: textTheme,
                               items: items,
                               hintText: AppStrings.txtSelectSubCaste,
-                              selectedValue: selectedValue,
+                              selectedValue:
+                                  signupBasicCubit.state.subCaste.isEmpty
+                                      ? userSelectedSubCasteValue
+                                      : signupBasicCubit.state.subCaste,
                               screenHeight: screenHeight,
                               screenWidth: screenWidth,
+                              onChangedFun: (value) {
+                                BlocProvider.of<SignupBasicCubit>(context)
+                                    .userSubCaste(value ?? "");
+                              },
                             ),
                           ),
                           Expanded(
@@ -136,9 +151,16 @@ class SignUpBasicScreen extends StatelessWidget {
                               textTheme: textTheme,
                               items: items,
                               hintText: AppStrings.txtSelectGender,
-                              selectedValue: selectedValue,
+                              selectedValue:
+                                  signupBasicCubit.state.gender.isEmpty
+                                      ? userSelectedGenderValue
+                                      : signupBasicCubit.state.gender,
                               screenHeight: screenHeight,
                               screenWidth: screenWidth,
+                              onChangedFun: (value) {
+                                BlocProvider.of<SignupBasicCubit>(context)
+                                    .userSelectGender(value ?? "");
+                              },
                             ),
                           ),
                         ],
@@ -229,20 +251,34 @@ class SignUpBasicScreen extends StatelessWidget {
                             child: SharedDropDownWidget(
                               textTheme: textTheme,
                               items: items,
-                              selectedValue: selectedValue,
+                              selectedValue:
+                                  signupBasicCubit.state.manglikStatus.isEmpty
+                                      ? userSelectedManglikStatusValue
+                                      : signupBasicCubit.state.manglikStatus,
                               screenHeight: screenHeight,
                               screenWidth: screenWidth,
                               hintText: AppStrings.txtManglikStatus,
+                              onChangedFun: (value) {
+                                BlocProvider.of<SignupBasicCubit>(context)
+                                    .userManglikStatus(value ?? "");
+                              },
                             ),
                           ),
                           Expanded(
                             child: SharedDropDownWidget(
                               textTheme: textTheme,
                               items: items,
-                              selectedValue: selectedValue,
+                              selectedValue:
+                                  signupBasicCubit.state.maritalStatus.isEmpty
+                                      ? userSelectedMaritalStatusValue
+                                      : signupBasicCubit.state.maritalStatus,
                               screenHeight: screenHeight,
                               screenWidth: screenWidth,
                               hintText: AppStrings.txtMaritalStatus,
+                              onChangedFun: (value) {
+                                BlocProvider.of<SignupBasicCubit>(context)
+                                    .userMartialStatus(value ?? "");
+                              },
                             ),
                           ),
                         ],
@@ -256,20 +292,34 @@ class SignUpBasicScreen extends StatelessWidget {
                             child: SharedDropDownWidget(
                               textTheme: textTheme,
                               items: items,
-                              selectedValue: selectedValue,
+                              selectedValue:
+                                  signupBasicCubit.state.createdBy.isEmpty
+                                      ? userSelectedCreatedByValue
+                                      : signupBasicCubit.state.createdBy,
                               screenHeight: screenHeight,
                               screenWidth: screenWidth,
                               hintText: AppStrings.txtProfileCreatedBy,
+                              onChangedFun: (value) {
+                                BlocProvider.of<SignupBasicCubit>(context)
+                                    .userCreatedBy(value ?? "");
+                              },
                             ),
                           ),
                           Expanded(
                             child: SharedDropDownWidget(
                               textTheme: textTheme,
                               items: items,
-                              selectedValue: selectedValue,
+                              selectedValue:
+                                  signupBasicCubit.state.education.isEmpty
+                                      ? userSelectedEducationValue
+                                      : signupBasicCubit.state.education,
                               screenHeight: screenHeight,
                               screenWidth: screenWidth,
                               hintText: AppStrings.txtEducation,
+                              onChangedFun: (value) {
+                                BlocProvider.of<SignupBasicCubit>(context)
+                                    .userEducationLevel(value ?? "");
+                              },
                             ),
                           ),
                         ],

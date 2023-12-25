@@ -22,6 +22,7 @@ dependencies:
   equatable: any
   image_picker: any
   pin_code_fields: any
+  fluttertoast: any
   image_cropper: any
   permission_handler: any
   path_provider: any

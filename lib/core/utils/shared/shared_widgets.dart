@@ -4,6 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
@@ -216,6 +217,16 @@ class SignUpHeaderWidget extends StatelessWidget {
   }
 }
 
+showToastMsg(String msg) {
+  Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: AppColors.primaryColor,
+      textColor: AppColors.white,
+      fontSize: 14.0);
+}
+
 class SharedDropDownWidget extends StatelessWidget {
   const SharedDropDownWidget({
     super.key,
@@ -225,6 +236,7 @@ class SharedDropDownWidget extends StatelessWidget {
     required this.screenHeight,
     required this.screenWidth,
     required this.hintText,
+    required this.onChangedFun,
   });
 
   final TextTheme textTheme;
@@ -233,6 +245,7 @@ class SharedDropDownWidget extends StatelessWidget {
   final String hintText;
   final double screenHeight;
   final double screenWidth;
+  final void Function(String?)? onChangedFun;
 
   @override
   Widget build(BuildContext context) {
@@ -250,16 +263,18 @@ class SharedDropDownWidget extends StatelessWidget {
             ),
           ),
           items: items
-              .map((String item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(
-                      item,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ))
+              .map(
+                (String item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(
+                    item,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              )
               .toList(),
           value: selectedValue,
-          onChanged: (value) {},
+          onChanged: onChangedFun,
           buttonStyleData: ButtonStyleData(
             height: screenHeight * 0.055,
             width: screenWidth * 0.5,
