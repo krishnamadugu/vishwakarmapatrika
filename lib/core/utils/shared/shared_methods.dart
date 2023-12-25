@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../constants/app_strings.dart';
 import '../../constants/theme/app_colors.dart';
 import '../../constants/theme/border_radii.dart';
@@ -28,4 +29,16 @@ UnderlineInputBorder buildUnderlineInputBorder() {
       color: AppColors.primaryColor,
     ),
   );
+}
+
+String dateFormatConverter(DateTime dateTime) {
+  String dateTimeVal = DateFormat('dd/MM/yyyy').format(dateTime);
+  return dateTimeVal;
+}
+
+String formatTimeOfDay(TimeOfDay tod) {
+  final now = DateTime.now();
+  final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
+  final format = DateFormat.jm();
+  return format.format(dt);
 }

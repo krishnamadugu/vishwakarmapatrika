@@ -19,8 +19,14 @@ dependencies:
   intl: any
   go_router: any
   dropdown_button2: any
+  equatable: any
   image_picker: any
   pin_code_fields: any
+  image_cropper: any
+  permission_handler: any
+  path_provider: any
+  syncfusion_flutter_datepicker: ^23.2.7
+
 
 dev_dependencies:
   flutter_test:

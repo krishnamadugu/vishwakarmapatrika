@@ -1,10 +1,17 @@
+import 'dart:io';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/border_radii.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/font_size.dart';
+import 'package:vishwakarmapatrika/core/services/api_services/native_api_service.dart';
 import 'package:vishwakarmapatrika/core/utils/shared/shared_methods.dart';
+import '../../../features/auth/sign_up/basic_details/presentation/cubit/signup_basic_cubit.dart';
 import '../../constants/app_strings.dart';
 
 class SharedTextFieldWidget extends StatelessWidget {
@@ -507,6 +514,143 @@ class SharedSignUpDropDownWidget extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SharedImagePicker {
+  final ImagePicker _picker = ImagePicker();
+  late CroppedFile imageFile;
+  late File croppedImgFile;
+  String imagePath = "";
+  String imageUrl = "";
+
+  getFromGallery(BuildContext context) async {
+    final XFile? photo = await _picker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    debugPrint(photo?.path.toString());
+    try {
+      if (!context.mounted) return;
+      _cropImage(photo?.path, context);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+    if (!context.mounted) return;
+    Navigator.pop(context);
+  }
+
+  getFromCamera(BuildContext context) async {
+    final XFile? photo = await _picker.pickImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    debugPrint(photo?.path.toString());
+    try {
+      if (!context.mounted) return;
+      _cropImage(photo?.path, context);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+    if (!context.mounted) return;
+    Navigator.pop(context);
+  }
+
+  _cropImage(filePath, BuildContext context) async {
+    CroppedFile? croppedImage;
+    try {
+      croppedImage = await ImageCropper().cropImage(
+        sourcePath: filePath,
+        maxWidth: 1080,
+        maxHeight: 1080,
+        uiSettings: [
+          AndroidUiSettings(
+              toolbarTitle: 'Cropper',
+              toolbarColor: Colors.deepOrange,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+        ],
+      );
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+    if (croppedImage != null) {
+      croppedImgFile =
+          await NativeApiService.getImgDirPath(File(croppedImage.path));
+      imagePath = croppedImgFile.path;
+      if (!context.mounted) return;
+      BlocProvider.of<SignupBasicCubit>(context).userImg(imagePath);
+      debugPrint(
+          "image path updated ${BlocProvider.of<SignupBasicCubit>(context).state.imgUrl}");
+    }
+  }
+
+  showAttachmentBottomSheet(BuildContext context, TextTheme txtTheme) {
+    showModalBottomSheet(
+      backgroundColor: AppColors.lightRed,
+      context: context,
+      builder: (BuildContext bc) {
+        return Container(
+          decoration: const BoxDecoration(
+              color: AppColors.primaryColor,
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(25), topLeft: Radius.circular(25))),
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(
+                  Icons.camera_alt,
+                  color: AppColors.white,
+                ),
+                title: Text(
+                  AppStrings.txtUploadCamera,
+                  style: txtTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
+                  ),
+                ),
+                onTap: () {
+                  try {
+                    getFromCamera(context);
+                  } catch (e) {
+                    debugPrint(e.toString());
+                  }
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.image,
+                  color: AppColors.white,
+                ),
+                title: Text(
+                  AppStrings.txtUploadGallery,
+                  style: txtTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white,
+                  ),
+                ),
+                onTap: () {
+                  try {
+                    getFromGallery(context);
+                  } catch (e) {
+                    debugPrint(e.toString());
+                  }
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

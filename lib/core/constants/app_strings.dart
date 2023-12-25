@@ -48,6 +48,8 @@ class AppStrings {
   static const String txtUnMarriedSisters = "Unmarried Sisters if any";
   static const String txtFinalStep = "Final Step";
   static const String txtFinishSignup = "Finish Signup";
+  static const String txtUploadCamera = 'Upload from camera';
+  static const String txtUploadGallery = 'Upload from gallery';
 
   //forgot password string values
   static const String txtForgotYourPassword = "Forgot Your Password";
