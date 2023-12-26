@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vishwakarmapatrika/config/route/app_routes.dart';
+import 'package:vishwakarmapatrika/core/constants/app_constants.dart';
 import 'package:vishwakarmapatrika/core/constants/app_images.dart';
 import 'package:vishwakarmapatrika/core/constants/app_strings.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
@@ -22,8 +23,10 @@ class SignInScreen extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
 
-    signInBtnPasswordTapped() {
+    signInBtnPasswordTapped() async {
       if (signinFormKey.currentState!.validate()) {
+        await sharedPref.setLoggedIn(true);
+        if(!(context.mounted)) return ;
         Navigator.pushNamedAndRemoveUntil(
           context,
           AppRoutes.homeScreen,

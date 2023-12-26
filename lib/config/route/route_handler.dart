@@ -7,8 +7,8 @@ import 'package:vishwakarmapatrika/features/auth/sign_up/contact_details/present
 import 'package:vishwakarmapatrika/features/auth/sign_up/family_details/presentation/page/signup_family_screen.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_up/password_details/presentation/page/signup_password_screen.dart';
 import '../../features/auth/forgot_password/new_password/presentation/page/new_password_screen.dart';
-import '../../features/error/error_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/optional/error_screen.dart';
 import 'app_routes.dart';
 
 class RouteHandler {
