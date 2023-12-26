@@ -1,5 +1,4 @@
 import 'package:vishwakarmapatrika/core/utils/validator/regex_exps.dart';
-
 import '../../constants/app_strings.dart';
 
 class Validator {
@@ -11,6 +10,13 @@ class Validator {
   String? validatePassword(String? value) {
     if (!validateStructure(value!, Regex.passwordRegexExp)) {
       return AppStrings.txtValidatePassword;
+    }
+    return null;
+  }
+
+  String? validateEmail(String? value) {
+    if (!(value!.contains('@'))) {
+      return AppStrings.txtPleaseEnterValidAddress;
     }
     return null;
   }

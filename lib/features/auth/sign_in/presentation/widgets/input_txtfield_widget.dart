@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vishwakarmapatrika/core/constants/app_strings.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/border_radii.dart';
+import 'package:vishwakarmapatrika/features/auth/sign_in/presentation/cubit/signin_cubit.dart';
+import '../../../../../core/constants/theme/app_colors.dart';
 import '../../../../../core/utils/shared/shared_methods.dart';
 import '../../../../../core/utils/shared/shared_widgets.dart';
 import '../../../../../core/utils/validator/validators.dart';
@@ -39,11 +42,26 @@ class InputTextFieldWidgets extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: BorderRadii.size_10,
           ),
-          child: SharedTextFieldWidget(
-            textEditingController: passwordTxtController,
-            textTheme: textTheme,
-            hintTxt: AppStrings.txtEnterPassword,
-            validatorFunction: Validator().validatePassword,
+          child: BlocBuilder<PasswordObscureCubit, bool>(
+            builder: (BuildContext context, state) {
+              return SharedTextFieldWidget(
+                textEditingController: passwordTxtController,
+                textTheme: textTheme,
+                obsTxtVal: !state,
+                hintTxt: AppStrings.txtEnterPassword,
+                validatorFunction: Validator().validatePassword,
+                suffixIconWidget: IconButton(
+                  onPressed: () {
+                    BlocProvider.of<PasswordObscureCubit>(context)
+                        .updateObscureVal(!state);
+                  },
+                  icon: Icon(
+                    state ? Icons.visibility : Icons.visibility_off,
+                    color: AppColors.black.withOpacity(0.3),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../../config/route/app_routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vishwakarmapatrika/features/auth/sign_up/family_details/model/temp_user_family_model.dart';
+import 'package:vishwakarmapatrika/features/auth/sign_up/family_details/presentation/cubit/signup_family_cubit.dart';
 import '../../../../../../core/constants/app_strings.dart';
 import '../../../../../../core/constants/theme/border_radii.dart';
 import '../../../../../../core/utils/shared/shared_methods.dart';
@@ -23,11 +25,17 @@ class SignUpFamilyScreen extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
-    String? selectedValue;
+    String? marriedBroCountVal;
+    String? unMarriedBroCountVal;
+    String? marriedSisCountVal;
+    String? unMarriedSisCountVal;
+    final signUpFamilyCubit = BlocProvider.of<SignUpFamilyCubit>(context);
 
     signUpBtnPasswordTapped() {
       if (signUpFamilyFormKey.currentState!.validate()) {
-        Navigator.pushNamed(context, AppRoutes.signUpScreen3);
+        signUpFamilyCubit.userFatherName(fatherNameController.text);
+        signUpFamilyCubit.userMotherName(motherNameController.text);
+        signUpFamilyCubit.signUpFamilyValidation(context);
       }
     }
 
@@ -40,96 +48,130 @@ class SignUpFamilyScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Form(
               key: signUpFamilyFormKey,
-              child: Column(
-                children: [
-                  SignUpHeaderWidget(
-                    headerText: AppStrings.txtFamilyDetails,
-                    textTheme: textTheme,
-                  ),
-                  const SizedBox(
-                    height: BorderRadii.size_50,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: BorderRadii.size_10,
-                    ),
-                    child: SharedTextFieldWidget(
-                      textEditingController: fatherNameController,
-                      textTheme: textTheme,
-                      hintTxt: AppStrings.txtEnterFatherName,
-                      validatorFunction: sharedValidatorFunc,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: BorderRadii.size_20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: BorderRadii.size_10,
-                    ),
-                    child: SharedTextFieldWidget(
-                      textEditingController: motherNameController,
-                      textTheme: textTheme,
-                      hintTxt: AppStrings.txtEnterMotherName,
-                      validatorFunction: sharedValidatorFunc,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: BorderRadii.size_20,
-                  ),
-                  SharedSignUpDropDownWidget(
-                    textTheme: textTheme,
-                    items: items,
-                    hintText: AppStrings.txtMarriedBrothers,
-                    selectedValue: selectedValue,
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth,
-                  ),
-                  const SizedBox(
-                    height: BorderRadii.size_20,
-                  ),
-                  SharedSignUpDropDownWidget(
-                    textTheme: textTheme,
-                    items: items,
-                    hintText: AppStrings.txtUnMarriedBrothers,
-                    selectedValue: selectedValue,
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth,
-                  ),
-                  const SizedBox(
-                    height: BorderRadii.size_20,
-                  ),
-                  SharedSignUpDropDownWidget(
-                    textTheme: textTheme,
-                    items: items,
-                    hintText: AppStrings.txtMarriedSisters,
-                    selectedValue: selectedValue,
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth,
-                  ),
-                  const SizedBox(
-                    height: BorderRadii.size_20,
-                  ),
-                  SharedSignUpDropDownWidget(
-                    textTheme: textTheme,
-                    items: items,
-                    hintText: AppStrings.txtUnMarriedSisters,
-                    selectedValue: selectedValue,
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth,
-                  ),
-                  const SizedBox(
-                    height: BorderRadii.size_40,
-                  ),
-                  InkWell(
-                    onTap: signUpBtnPasswordTapped,
-                    child: SharedActionButtonWidget(
-                      screenWidth: screenWidth,
-                      textTheme: textTheme,
-                      btnText: AppStrings.txtContinue,
-                    ),
-                  ),
-                ],
+              child: BlocConsumer<SignUpFamilyCubit, TempUserFamilyModel>(
+                bloc: signUpFamilyCubit,
+                listener: (BuildContext context, state) {},
+                builder: (BuildContext context, state) {
+                  return Column(
+                    children: [
+                      SignUpHeaderWidget(
+                        headerText: AppStrings.txtFamilyDetails,
+                        textTheme: textTheme,
+                      ),
+                      const SizedBox(
+                        height: BorderRadii.size_50,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: BorderRadii.size_10,
+                        ),
+                        child: SharedTextFieldWidget(
+                          textEditingController: fatherNameController,
+                          textTheme: textTheme,
+                          hintTxt: AppStrings.txtEnterFatherName,
+                          validatorFunction: sharedValidatorFunc,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: BorderRadii.size_20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: BorderRadii.size_10,
+                        ),
+                        child: SharedTextFieldWidget(
+                          textEditingController: motherNameController,
+                          textTheme: textTheme,
+                          hintTxt: AppStrings.txtEnterMotherName,
+                          validatorFunction: sharedValidatorFunc,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: BorderRadii.size_20,
+                      ),
+                      SharedSignUpDropDownWidget(
+                        textTheme: textTheme,
+                        items: items,
+                        hintText: AppStrings.txtMarriedBrothers,
+                        selectedValue:
+                            signUpFamilyCubit.state.marriedBrothersCount.isEmpty
+                                ? marriedBroCountVal
+                                : signUpFamilyCubit.state.marriedBrothersCount,
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
+                        onChangedFun: (value) {
+                          signUpFamilyCubit
+                              .userMarriedBrothersCount(value ?? '');
+                        },
+                      ),
+                      const SizedBox(
+                        height: BorderRadii.size_20,
+                      ),
+                      SharedSignUpDropDownWidget(
+                        textTheme: textTheme,
+                        items: items,
+                        hintText: AppStrings.txtUnMarriedBrothers,
+                        selectedValue: signUpFamilyCubit
+                                .state.unMarriedBrothersCount.isEmpty
+                            ? unMarriedBroCountVal
+                            : signUpFamilyCubit.state.unMarriedBrothersCount,
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
+                        onChangedFun: (value) {
+                          signUpFamilyCubit
+                              .userUnMarriedBrothersCount(value ?? '');
+                        },
+                      ),
+                      const SizedBox(
+                        height: BorderRadii.size_20,
+                      ),
+                      SharedSignUpDropDownWidget(
+                        textTheme: textTheme,
+                        items: items,
+                        hintText: AppStrings.txtMarriedSisters,
+                        selectedValue:
+                            signUpFamilyCubit.state.marriedSistersCount.isEmpty
+                                ? marriedSisCountVal
+                                : signUpFamilyCubit.state.marriedSistersCount,
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
+                        onChangedFun: (value) {
+                          signUpFamilyCubit
+                              .userMarriedSistersCount(value ?? '');
+                        },
+                      ),
+                      const SizedBox(
+                        height: BorderRadii.size_20,
+                      ),
+                      SharedSignUpDropDownWidget(
+                        textTheme: textTheme,
+                        items: items,
+                        hintText: AppStrings.txtUnMarriedSisters,
+                        selectedValue: signUpFamilyCubit
+                                .state.unMarriedSistersCount.isEmpty
+                            ? unMarriedSisCountVal
+                            : signUpFamilyCubit.state.unMarriedSistersCount,
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
+                        onChangedFun: (value) {
+                          signUpFamilyCubit
+                              .userUnMarriedSistersCount(value ?? '');
+                        },
+                      ),
+                      const SizedBox(
+                        height: BorderRadii.size_40,
+                      ),
+                      InkWell(
+                        onTap: signUpBtnPasswordTapped,
+                        child: SharedActionButtonWidget(
+                          screenWidth: screenWidth,
+                          textTheme: textTheme,
+                          btnText: AppStrings.txtContinue,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ),

@@ -74,7 +74,7 @@ class SignupBasicCubit extends Cubit<TempUserProfileModel> {
   }
 
   void signUpBasicValidation(BuildContext context) {
-    if ((state.name.isEmpty ||
+    if (!(state.name.isEmpty ||
         state.birthPlace.isEmpty ||
         state.enterOccupation.isEmpty ||
         state.enterHobbies.isEmpty)) {
@@ -96,9 +96,9 @@ class SignupBasicCubit extends Cubit<TempUserProfileModel> {
         showToastMsg(AppStrings.txtRequestEducation);
       } else if (state.imgUrl.isEmpty) {
         showToastMsg(AppStrings.txtRequestImgUrl);
+      } else {
+        Navigator.pushNamed(context, AppRoutes.signUpScreen2);
       }
-    } else {
-      Navigator.pushNamed(context, AppRoutes.signUpScreen2);
     }
   }
 }

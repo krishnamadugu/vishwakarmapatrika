@@ -19,6 +19,10 @@ class VerifyOtpScreen extends StatelessWidget {
 
     forgotPasswordBtnPasswordTapped() {
       if (otpFormKey.currentState!.validate()) {
+        if (otpVerifyController.text.length < 4) {
+          showToastMsg(AppStrings.txtPleaseEnterValidOtp);
+          return;
+        }
         Navigator.pushNamed(context, AppRoutes.recoverPasswordScreen);
       }
     }
@@ -54,7 +58,7 @@ class VerifyOtpScreen extends StatelessWidget {
                       text1: AppStrings.txtDontGetTheOtp,
                       text2: AppStrings.txtResendOtp,
                       textTheme: textTheme,
-                      signUpOptionTapped: forgotPasswordBtnPasswordTapped,
+                      signUpOptionTapped: () {},
                     ),
                   ),
                   const SizedBox(

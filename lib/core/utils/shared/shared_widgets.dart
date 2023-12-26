@@ -25,6 +25,7 @@ class SharedTextFieldWidget extends StatelessWidget {
     required this.validatorFunction,
     required this.textTheme,
     required this.hintTxt,
+    this.keyBoardTypeVal,
     this.obsTxtVal = false,
   });
 
@@ -32,6 +33,7 @@ class SharedTextFieldWidget extends StatelessWidget {
   final String? Function(String?)? validatorFunction;
   final TextTheme textTheme;
   final String hintTxt;
+  final TextInputType? keyBoardTypeVal;
   final Widget suffixIconWidget;
   final bool obsTxtVal;
 
@@ -43,6 +45,7 @@ class SharedTextFieldWidget extends StatelessWidget {
       style: textTheme.labelSmall?.copyWith(
         fontSize: FontSizes.size_20,
       ),
+      keyboardType: keyBoardTypeVal,
       obscureText: obsTxtVal,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
@@ -443,6 +446,7 @@ class SharedSignUpDropDownWidget extends StatelessWidget {
     required this.screenHeight,
     required this.screenWidth,
     required this.hintText,
+    required this.onChangedFun,
   });
 
   final TextTheme textTheme;
@@ -451,6 +455,7 @@ class SharedSignUpDropDownWidget extends StatelessWidget {
   final String hintText;
   final double screenHeight;
   final double screenWidth;
+  final void Function(String?)? onChangedFun;
 
   @override
   Widget build(BuildContext context) {
@@ -478,7 +483,7 @@ class SharedSignUpDropDownWidget extends StatelessWidget {
                   ))
               .toList(),
           value: selectedValue,
-          onChanged: (value) {},
+          onChanged: onChangedFun,
           buttonStyleData: ButtonStyleData(
             height: screenHeight * 0.08,
             width: screenWidth * 0.84,

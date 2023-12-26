@@ -54,6 +54,14 @@ class AppStrings {
   static const String txtRequestGender = 'Please choose your gender';
   static const String txtRequestDOB = 'Please choose your date of birth';
   static const String txtRequestBirthTime = 'Please choose your birth time';
+  static const String txtRequestMarriedBroCount =
+      'Please choose married brothers you had if any';
+  static const String txtRequestUnMarriedBroCount =
+      'Please choose un married brothers you had if any';
+  static const String txtRequestMarriedSisCount =
+      'Please choose married sisters you had if any';
+  static const String txtRequestUnMarriedSisCount =
+      'Please choose un married sisters you had if any';
   static const String txtRequestBirthPlace = 'Please choose your birth place';
   static const String txtRequestManglikStatus =
       'Please choose your Manglik Status';
@@ -63,14 +71,20 @@ class AppStrings {
   static const String txtRequestEducation =
       'Please choose your Education Level';
   static const String txtRequestImgUrl = 'Please provide your profile picture';
+  static const String txtRequestStateName = 'Please choose your state name';
 
   //forgot password string values
   static const String txtForgotYourPassword = "Forgot Your Password";
   static const String txtSubmit = "Submit";
   static const String txtPleaseEnterOtp = "Please Enter OTP";
+  static const String txtPleaseEnterValidOtp = "Please Enter valid OTP";
+  static const String txtPleaseEnterValidAddress =
+      "Please Enter valid email address";
   static const String txtDontGetTheOtp = "Didn’t get the OTP? ";
   static const String txtResendOtp = "Resend OTP";
   static const String txtRecoverAccount = "Recover your account";
   static const String txtNewPassword = "Enter  new  password";
   static const String txtConfirmPassword = "confirm your password";
+  static const String txtPasswordDontMatch =
+      "Password doesn't match please check";
 }

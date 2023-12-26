@@ -4,6 +4,7 @@ import '../../../../../../core/constants/theme/app_colors.dart';
 import '../../../../../../core/constants/theme/border_radii.dart';
 import '../../../../../../core/constants/theme/font_size.dart';
 import '../../../../../../core/utils/shared/shared_methods.dart';
+import '../../../../../../core/utils/validator/validators.dart';
 
 class InputTextFieldWidget extends StatelessWidget {
   const InputTextFieldWidget({
@@ -23,7 +24,7 @@ class InputTextFieldWidget extends StatelessWidget {
       ),
       child: TextFormField(
         controller: emailAddressController,
-        validator: sharedValidatorFunc,
+        validator: Validator().validateEmail,
         style: textTheme.labelSmall?.copyWith(
           fontSize: FontSizes.size_20,
         ),
