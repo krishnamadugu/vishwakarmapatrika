@@ -28,6 +28,7 @@ dependencies:
   permission_handler: any
   path_provider: any
   syncfusion_flutter_datepicker: ^23.2.7
+  flutter_svg: any
 
 
 dev_dependencies:
@@ -41,6 +42,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/icons/
   fonts:
     - family: Source Sans 3
       fonts:
@@ -60,5 +62,10 @@ flutter:
           weight: 800
         - asset: assets/fonts/Source_Sans_3 /static/SourceSans3-Black.ttf
           weight: 900
+
+    - family: Lobster Two
+      fonts:
+        - asset: assets/fonts/Lobster_Two/LobsterTwo-Regular.ttf
+
   
   

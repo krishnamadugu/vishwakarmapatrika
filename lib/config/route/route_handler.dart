@@ -19,9 +19,7 @@ class RouteHandler {
     switch (routeName) {
       case AppRoutes.homeScreen:
         return MaterialPageRoute(
-          builder: (splashContext) => const HomeScreen(
-            title: "my home page",
-          ),
+          builder: (splashContext) => const HomeScreen(),
         );
       case AppRoutes.loginScreen:
         return MaterialPageRoute(

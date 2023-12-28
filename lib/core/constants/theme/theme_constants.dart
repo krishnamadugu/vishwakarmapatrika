@@ -4,7 +4,8 @@ import 'app_colors.dart';
 class ThemeConstants {
   //textColorTheme
   static Color txtColor = AppColors.black;
-  static const String appFontFamily = 'Source Sans 3';
+  static const String appSourceFontFamily = 'Source Sans 3';
+  static const String appLobsterTwoFontFamily = 'Lobster Two';
 
   //inputDecorationTheme
   static const inputDecorationTheme = InputDecorationTheme(
@@ -40,77 +41,77 @@ class ThemeConstants {
     displayLarge: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.bold,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     displayMedium: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.normal,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     displaySmall: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.w300,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     headlineLarge: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.bold,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     headlineMedium: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.normal,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     headlineSmall: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.w400,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     titleLarge: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.bold,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     titleMedium: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.normal,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     titleSmall: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.w300,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     bodyLarge: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.bold,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     bodyMedium: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.normal,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     bodySmall: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.w300,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     labelLarge: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.bold,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     labelMedium: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.normal,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
     labelSmall: TextStyle(
       color: ThemeConstants.txtColor,
       fontWeight: FontWeight.w400,
-      fontFamily: appFontFamily,
+      fontFamily: appSourceFontFamily,
     ),
   );
 

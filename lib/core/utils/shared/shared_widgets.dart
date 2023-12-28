@@ -673,3 +673,45 @@ class SharedImagePicker {
     );
   }
 }
+
+class SharedShadowContainerWidget extends StatelessWidget {
+  const SharedShadowContainerWidget({
+    super.key,
+    required this.selectedColor,
+    required this.containerVal,
+    required this.textTheme,
+  });
+
+  final Color selectedColor;
+  final String containerVal;
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+        vertical: 10,
+      ),
+      decoration: BoxDecoration(
+        color: selectedColor,
+        borderRadius: BorderRadius.circular(16.0),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withOpacity(0.1),
+            offset: const Offset(0, 5),
+            spreadRadius: 2,
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: Text(
+        containerVal,
+        style: textTheme.bodyMedium?.copyWith(
+          color: AppColors.black,
+          fontSize: FontSizes.size_14,
+        ),
+      ),
+    );
+  }
+}
