@@ -5,30 +5,28 @@ import '../../../../../../core/constants/app_strings.dart';
 import '../../../../../../core/constants/theme/border_radii.dart';
 import '../../../../../../core/utils/shared/shared_methods.dart';
 import '../../../../../../core/utils/shared/shared_widgets.dart';
+import '../../../basic_details/model/form_field_list_model.dart';
 import '../../model/temp_user_contact_model.dart';
 import '../cubit/signup_contact_cubit.dart';
 
 class SignUpContactScreen extends StatelessWidget {
-  SignUpContactScreen({super.key});
+  SignUpContactScreen({super.key, required this.formFieldListDataModel});
 
   final TextEditingController mobileNumberController = TextEditingController();
   final TextEditingController emailAddressController = TextEditingController();
   final TextEditingController fullAddressController = TextEditingController();
   final TextEditingController cityNameController = TextEditingController();
+  final TextEditingController locationNameController = TextEditingController();
+  final TextEditingController aboutUsController = TextEditingController();
   final signUpContactFormKey = GlobalKey<FormState>();
-  final List<String> items = [
-    "Item 1 ",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5"
-  ];
+  final FormFieldListDataModel formFieldListDataModel;
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
+    final List<String> stateItems = formFieldListDataModel.data?.state ?? [];
     final signUpContactCubit = BlocProvider.of<SignUpContactCubit>(context);
     String? selectedStateValue;
 
@@ -38,7 +36,11 @@ class SignUpContactScreen extends StatelessWidget {
         signUpContactCubit.userMobileNum(mobileNumberController.text);
         signUpContactCubit.userCityName(cityNameController.text);
         signUpContactCubit.userFullAddress(fullAddressController.text);
-        signUpContactCubit.signUpContactValidation(context);
+        signUpContactCubit.userAboutSection(aboutUsController.text);
+        signUpContactCubit.userLocation(locationNameController.text);
+        signUpContactCubit.signUpContactValidation(
+          context,
+        );
       }
     }
 
@@ -72,7 +74,7 @@ class SignUpContactScreen extends StatelessWidget {
                           textTheme: textTheme,
                           keyBoardTypeVal: TextInputType.number,
                           hintTxt: AppStrings.txtEnterMobileNum,
-                          validatorFunction: sharedValidatorFunc,
+                          validatorFunction: Validator().validateMobileNum,
                         ),
                       ),
                       const SizedBox(
@@ -110,7 +112,7 @@ class SignUpContactScreen extends StatelessWidget {
                         children: [
                           SharedSignUpDropDownWidget(
                             textTheme: textTheme,
-                            items: items,
+                            items: stateItems,
                             hintText: AppStrings.txtSelectYourState,
                             selectedValue:
                                 signUpContactCubit.state.stateName.isEmpty
@@ -135,6 +137,35 @@ class SignUpContactScreen extends StatelessWidget {
                           textEditingController: cityNameController,
                           textTheme: textTheme,
                           hintTxt: AppStrings.txtEnterCityName,
+                          validatorFunction: sharedValidatorFunc,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: BorderRadii.size_20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: BorderRadii.size_10,
+                        ),
+                        child: SharedTextFieldWidget(
+                          textEditingController: locationNameController,
+                          textTheme: textTheme,
+                          hintTxt: AppStrings.txtEnterLocationName,
+                          validatorFunction: sharedValidatorFunc,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: BorderRadii.size_20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: BorderRadii.size_10,
+                        ),
+                        child: SharedTextFieldWidget(
+                          textEditingController: aboutUsController,
+                          textTheme: textTheme,
+                          maxLines: 4,
+                          hintTxt: AppStrings.txtEnterAboutUs,
                           validatorFunction: sharedValidatorFunc,
                         ),
                       ),

@@ -2,7 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:vishwakarmapatrika/config/route/app_routes.dart';
 import 'package:vishwakarmapatrika/core/constants/app_strings.dart';
+import 'package:vishwakarmapatrika/features/auth/sign_in/model/signin_model.dart';
+import '../../config/route/route_arguments.dart';
 import '../../core/constants/app_constants.dart';
+import '../../main.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,21 +18,29 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(const Duration(milliseconds: 1), () async {
-      await sharedPref.isUserLoggedIn() == true
-          ? !(context.mounted)
-              ? AppStrings.txtEmptyString
-              : Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  AppRoutes.homeScreen,
-                  (route) => false,
-                )
-          : !(context.mounted)
-              ? AppStrings.txtEmptyString
-              : Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  AppRoutes.homeScreen,
-                  (route) => false,
-                );
+      debugPrint('${await sharedPref.isUserLoggedIn()}');
+      if (await sharedPref.isUserLoggedIn() == true) {
+        SignInModel signInModel =
+            await sharedPref.getUserData() ?? SignInModel();
+        if (!(context.mounted)) {
+          AppStrings.txtEmptyString;
+        } else {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRoutes.homeScreen,
+            arguments: HomeScreenArguments(signInModel),
+            (Route<dynamic> route) => false,
+          );
+        }
+      } else {
+        !(context.mounted)
+            ? AppStrings.txtEmptyString
+            : Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.loginScreen,
+                (route) => false,
+              );
+      }
     });
     super.initState();
   }

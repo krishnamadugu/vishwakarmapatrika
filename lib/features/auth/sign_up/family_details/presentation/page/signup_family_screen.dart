@@ -6,19 +6,17 @@ import '../../../../../../core/constants/app_strings.dart';
 import '../../../../../../core/constants/theme/border_radii.dart';
 import '../../../../../../core/utils/shared/shared_methods.dart';
 import '../../../../../../core/utils/shared/shared_widgets.dart';
+import '../../../basic_details/model/form_field_list_model.dart';
 
 class SignUpFamilyScreen extends StatelessWidget {
-  SignUpFamilyScreen({super.key});
+  SignUpFamilyScreen({super.key, required this.formFieldListDataModel});
   final TextEditingController fatherNameController = TextEditingController();
   final TextEditingController motherNameController = TextEditingController();
   final signUpFamilyFormKey = GlobalKey<FormState>();
-  final List<String> items = [
-    "Item 1 ",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5"
-  ];
+  final FormFieldListDataModel formFieldListDataModel;
+
+  final List<String> itemCountList =
+      List.generate(11, (index) => (index).toString());
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +33,8 @@ class SignUpFamilyScreen extends StatelessWidget {
       if (signUpFamilyFormKey.currentState!.validate()) {
         signUpFamilyCubit.userFatherName(fatherNameController.text);
         signUpFamilyCubit.userMotherName(motherNameController.text);
-        signUpFamilyCubit.signUpFamilyValidation(context);
+        signUpFamilyCubit.signUpFamilyValidation(
+            context, formFieldListDataModel);
       }
     }
 
@@ -91,7 +90,7 @@ class SignUpFamilyScreen extends StatelessWidget {
                       ),
                       SharedSignUpDropDownWidget(
                         textTheme: textTheme,
-                        items: items,
+                        items: itemCountList,
                         hintText: AppStrings.txtMarriedBrothers,
                         selectedValue:
                             signUpFamilyCubit.state.marriedBrothersCount.isEmpty
@@ -109,7 +108,7 @@ class SignUpFamilyScreen extends StatelessWidget {
                       ),
                       SharedSignUpDropDownWidget(
                         textTheme: textTheme,
-                        items: items,
+                        items: itemCountList,
                         hintText: AppStrings.txtUnMarriedBrothers,
                         selectedValue: signUpFamilyCubit
                                 .state.unMarriedBrothersCount.isEmpty
@@ -127,7 +126,7 @@ class SignUpFamilyScreen extends StatelessWidget {
                       ),
                       SharedSignUpDropDownWidget(
                         textTheme: textTheme,
-                        items: items,
+                        items: itemCountList,
                         hintText: AppStrings.txtMarriedSisters,
                         selectedValue:
                             signUpFamilyCubit.state.marriedSistersCount.isEmpty
@@ -145,7 +144,7 @@ class SignUpFamilyScreen extends StatelessWidget {
                       ),
                       SharedSignUpDropDownWidget(
                         textTheme: textTheme,
-                        items: items,
+                        items: itemCountList,
                         hintText: AppStrings.txtUnMarriedSisters,
                         selectedValue: signUpFamilyCubit
                                 .state.unMarriedSistersCount.isEmpty

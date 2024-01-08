@@ -14,6 +14,15 @@ class Validator {
     return null;
   }
 
+  String? validateMobileNum(String? value) {
+    if ((value == null || value.trim() == AppStrings.txtEmptyString)) {
+      return AppStrings.txtFieldValidator;
+    } else if (value.length != 10) {
+      return AppStrings.txtValidateMobileNumber;
+    }
+    return null;
+  }
+
   String? validateEmail(String? value) {
     if (!(value!.contains('@'))) {
       return AppStrings.txtPleaseEnterValidAddress;

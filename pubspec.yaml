@@ -29,12 +29,19 @@ dependencies:
   path_provider: any
   syncfusion_flutter_datepicker: ^23.2.7
   flutter_svg: any
+  http: any
+  dio: any
+  hive: any
+  hive_flutter: any
+  connectivity_plus: any
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  hive_generator:
+  build_runner:
 
 
 flutter:

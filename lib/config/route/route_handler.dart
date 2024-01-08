@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vishwakarmapatrika/config/route/route_arguments.dart';
 import 'package:vishwakarmapatrika/features/auth/forgot_password/enter_email/presentation/page/forgot_password.dart';
 import 'package:vishwakarmapatrika/features/auth/forgot_password/verify_otp/presentation/page/verify_otp_screen.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_in/presentation/page/signin_screen.dart';
@@ -14,28 +15,41 @@ import 'app_routes.dart';
 class RouteHandler {
   static Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
     var routeName = routeSettings.name;
-    //var routeArgs = routeSettings.arguments;
+    var routeArgs = routeSettings.arguments;
 
     switch (routeName) {
       case AppRoutes.homeScreen:
+        final args = routeArgs as HomeScreenArguments;
         return MaterialPageRoute(
-          builder: (splashContext) => const HomeScreen(),
+          builder: (splashContext) => HomeScreen(
+            userName:
+                args.signInModel.data?.profile?.name ?? "name value is null",
+          ),
         );
       case AppRoutes.loginScreen:
         return MaterialPageRoute(
           builder: (loginScreenContext) => SignInScreen(),
         );
       case AppRoutes.signUpScreen1:
+        final args = routeArgs as BasicSignUpDetailsArguments;
         return MaterialPageRoute(
-          builder: (signUpBasicScreenContext) => SignUpBasicScreen(),
+          builder: (signUpBasicScreenContext) => SignUpBasicScreen(
+            formFieldListDataModel: args.formFieldListDataModel,
+          ),
         );
       case AppRoutes.signUpScreen2:
+        final args = routeArgs as BasicSignUpDetailsArguments;
         return MaterialPageRoute(
-          builder: (signUpBasicScreenContext) => SignUpFamilyScreen(),
+          builder: (signUpBasicScreenContext) => SignUpFamilyScreen(
+            formFieldListDataModel: args.formFieldListDataModel,
+          ),
         );
       case AppRoutes.signUpScreen3:
+        final args = routeArgs as BasicSignUpDetailsArguments;
         return MaterialPageRoute(
-          builder: (signUpBasicScreenContext) => SignUpContactScreen(),
+          builder: (signUpBasicScreenContext) => SignUpContactScreen(
+            formFieldListDataModel: args.formFieldListDataModel,
+          ),
         );
       case AppRoutes.signUpScreen4:
         return MaterialPageRoute(

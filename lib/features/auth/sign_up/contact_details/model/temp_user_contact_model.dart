@@ -6,6 +6,8 @@ class TempUserContactModel extends Equatable {
   late String emailAddress;
   late String fullAddress;
   late String stateName;
+  late String location;
+  late String aboutSection;
   late String cityName;
 
   TempUserContactModel({
@@ -13,7 +15,9 @@ class TempUserContactModel extends Equatable {
     this.emailAddress = "",
     this.fullAddress = "",
     this.stateName = "",
+    this.location = "",
     this.cityName = "",
+    this.aboutSection = '',
   });
 
   TempUserContactModel copyWith({
@@ -22,6 +26,8 @@ class TempUserContactModel extends Equatable {
     String? fullAddress,
     String? stateName,
     String? cityName,
+    String? location,
+    String? aboutSection,
   }) {
     return TempUserContactModel(
       mobileNum: mobileNum ?? this.mobileNum,
@@ -29,6 +35,8 @@ class TempUserContactModel extends Equatable {
       fullAddress: fullAddress ?? this.fullAddress,
       stateName: stateName ?? this.stateName,
       cityName: cityName ?? this.cityName,
+      location: location ?? this.location,
+      aboutSection: aboutSection ?? this.aboutSection,
     );
   }
 
@@ -39,5 +47,7 @@ class TempUserContactModel extends Equatable {
         fullAddress,
         stateName,
         cityName,
+        location,
+        aboutSection,
       ];
 }

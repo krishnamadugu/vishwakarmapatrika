@@ -15,6 +15,8 @@ class AppStrings {
   static const String txtDontHaveAccount = "Don’t  have an account? ";
   static const String txtSignUp = "Sign Up ";
   static const String txtValidatePassword = 'Please enter a valid password';
+  static const String txtValidateMobileNumber =
+      'Please enter a valid Mobile number';
   static const String txtSignInMsg =
       "Welcome back to the world’s best matchmaking service";
 
@@ -32,6 +34,8 @@ class AppStrings {
   static const String txtMaritalStatus = "Marital Status";
   static const String txtProfileCreatedBy = "Created By";
   static const String txtEducation = "Education";
+  static const String txtHeightInFt = "Height in Ft";
+  static const String txtHeightInInches = "Height in Inches";
   static const String txtContinue = "Continue";
   static const String txtContactDetails = "Contact Details";
   static const String txtEnterMobileNum = "Enter  your mobile number";
@@ -39,6 +43,8 @@ class AppStrings {
   static const String txtEnterFullAddress = "Enter Your Full Address";
   static const String txtSelectYourState = "Select Your State";
   static const String txtEnterCityName = "Enter City Name";
+  static const String txtEnterLocationName = "Enter Location Name";
+  static const String txtEnterAboutUs = "Enter About you";
   static const String txtFamilyDetails = "Family Details";
   static const String txtEnterFatherName = "Enter Your  Father name ";
   static const String txtEnterMotherName = "Enter Your  Mother name ";
@@ -70,6 +76,8 @@ class AppStrings {
       'Please choose your Marital Status';
   static const String txtRequestEducation =
       'Please choose your Education Level';
+  static const String txtRequestHeight =
+      'Please choose your Height in Ft & Inches';
   static const String txtRequestImgUrl = 'Please provide your profile picture';
   static const String txtRequestStateName = 'Please choose your state name';
 

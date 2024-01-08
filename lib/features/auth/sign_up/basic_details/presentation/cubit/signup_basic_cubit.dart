@@ -1,7 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:vishwakarmapatrika/core/constants/app_constants.dart';
+import 'package:vishwakarmapatrika/features/auth/sign_up/basic_details/model/form_field_list_model.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_up/basic_details/model/temp_user_profile_model.dart';
 import '../../../../../../config/route/app_routes.dart';
+import '../../../../../../config/route/route_arguments.dart';
 import '../../../../../../core/constants/app_strings.dart';
 import '../../../../../../core/utils/shared/shared_widgets.dart';
 
@@ -73,7 +77,18 @@ class SignupBasicCubit extends Cubit<TempUserProfileModel> {
     debugPrint(state.education.toString());
   }
 
-  void signUpBasicValidation(BuildContext context) {
+  void heightInFt(String feet) {
+    emit(state.copyWith(heightFt: feet));
+    debugPrint(state.heightFt.toString());
+  }
+
+  void heightInInches(String inches) {
+    emit(state.copyWith(heightIn: inches));
+    debugPrint(state.heightIn.toString());
+  }
+
+  Future<void> signUpBasicValidation(BuildContext context,
+      FormFieldListDataModel formFieldListDataModel) async {
     if (!(state.name.isEmpty ||
         state.birthPlace.isEmpty ||
         state.enterOccupation.isEmpty ||
@@ -96,8 +111,31 @@ class SignupBasicCubit extends Cubit<TempUserProfileModel> {
         showToastMsg(AppStrings.txtRequestEducation);
       } else if (state.imgUrl.isEmpty) {
         showToastMsg(AppStrings.txtRequestImgUrl);
+      } else if (state.heightFt.isEmpty) {
+        showToastMsg(AppStrings.txtRequestHeight);
+      } else if (state.heightIn.isEmpty) {
+        showToastMsg(AppStrings.txtRequestHeight);
       } else {
-        Navigator.pushNamed(context, AppRoutes.signUpScreen2);
+        userSignUpData['name'] = state.name;
+        userSignUpData['gotra'] = state.subCaste;
+        userSignUpData['gender'] = state.gender;
+        userSignUpData['dob'] = state.dob;
+        userSignUpData['birthTime'] = state.birthTime;
+        userSignUpData['birthPlace'] = state.birthPlace;
+        userSignUpData['manglik'] = state.manglikStatus;
+        userSignUpData['maritalStatus'] = state.maritalStatus;
+        userSignUpData['education'] = state.education;
+        userSignUpData['profileBy'] = state.createdBy;
+        userSignUpData['height_f'] = state.heightFt;
+        userSignUpData['height_i'] = state.heightIn;
+        userSignUpData['image'] = state.imgUrl;
+        userSignUpData['occupation'] = state.enterOccupation;
+        userSignUpData['hobbies'] = state.enterHobbies;
+
+        Navigator.pushNamed(
+            context,
+            arguments: BasicSignUpDetailsArguments(formFieldListDataModel),
+            AppRoutes.signUpScreen2);
       }
     }
   }

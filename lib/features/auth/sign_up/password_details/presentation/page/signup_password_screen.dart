@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vishwakarmapatrika/core/constants/app_constants.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
+import 'package:vishwakarmapatrika/features/auth/sign_in/model/signin_model.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_in/presentation/cubit/signin_cubit.dart';
 import '../../../../../../config/route/app_routes.dart';
+import '../../../../../../config/route/route_arguments.dart';
 import '../../../../../../core/constants/app_strings.dart';
 import '../../../../../../core/constants/theme/border_radii.dart';
 import '../../../../../../core/utils/shared/shared_widgets.dart';
@@ -32,11 +35,8 @@ class SingUpPasswordScreen extends StatelessWidget {
           showToastMsg(AppStrings.txtPasswordDontMatch);
           return;
         }
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AppRoutes.homeScreen,
-          (Route<dynamic> route) => false,
-        );
+        userSignUpData['password'] = confirmPasswordController.text;
+        signUpPasswordCubit.signUpUser(context);
       }
     }
 
@@ -50,7 +50,6 @@ class SingUpPasswordScreen extends StatelessWidget {
             child: Form(
               key: signUpPasswordFormKey,
               child: BlocConsumer<SignUpPasswordCubit, SignUpPasswordModel>(
-                bloc: SignUpPasswordCubit(),
                 listener: (BuildContext context, state) {},
                 builder: (BuildContext context, state) {
                   return Column(

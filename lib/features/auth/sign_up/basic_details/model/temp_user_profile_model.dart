@@ -13,6 +13,8 @@ class TempUserProfileModel extends Equatable {
   late String maritalStatus;
   late String createdBy;
   late String education;
+  late String heightIn;
+  late String heightFt;
   late String enterOccupation;
   late String enterHobbies;
 
@@ -30,6 +32,8 @@ class TempUserProfileModel extends Equatable {
     this.education = '',
     this.enterOccupation = '',
     this.enterHobbies = '',
+    this.heightFt = '',
+    this.heightIn = '',
   });
 
   TempUserProfileModel copyWith({
@@ -46,6 +50,8 @@ class TempUserProfileModel extends Equatable {
     String? education,
     String? enterOccupation,
     String? enterHobbies,
+    String? heightFt,
+    String? heightIn,
   }) {
     return TempUserProfileModel(
       imgUrl: imgUrl ?? this.imgUrl,
@@ -61,12 +67,14 @@ class TempUserProfileModel extends Equatable {
       education: education ?? this.education,
       enterOccupation: enterOccupation ?? this.enterOccupation,
       enterHobbies: enterHobbies ?? this.enterHobbies,
+      heightFt: heightFt ?? this.heightFt,
+      heightIn: heightIn ?? this.heightIn,
     );
   }
 
   @override
   String toString() {
-    return 'TempUserProfileModel{imgUrl: $imgUrl, name: $name, subCaste: $subCaste, gender: $gender, dob: $dob, birthTime: $birthTime, birthPlace: $birthPlace, manglikStatus: $manglikStatus, maritalStatus: $maritalStatus, createdBy: $createdBy, education: $education, enterOccupation: $enterOccupation, enterHobbies: $enterHobbies}';
+    return 'TempUserProfileModel{imgUrl: $imgUrl, name: $name, subCaste: $subCaste, gender: $gender, dob: $dob, birthTime: $birthTime, birthPlace: $birthPlace, manglikStatus: $manglikStatus, maritalStatus: $maritalStatus, createdBy: $createdBy, education: $education, enterOccupation: $enterOccupation, enterHobbies: $enterHobbies, heightInFt: $heightFt, heightInInches: $heightIn }';
   }
 
   @override
@@ -84,5 +92,7 @@ class TempUserProfileModel extends Equatable {
         education,
         enterOccupation,
         enterHobbies,
+        heightIn,
+        heightFt
       ];
 }

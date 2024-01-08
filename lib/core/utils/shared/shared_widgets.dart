@@ -12,6 +12,7 @@ import 'package:vishwakarmapatrika/core/constants/theme/font_size.dart';
 import 'package:vishwakarmapatrika/core/services/api_services/native_api_service.dart';
 import 'package:vishwakarmapatrika/core/utils/shared/shared_methods.dart';
 import '../../../features/auth/sign_up/basic_details/presentation/cubit/signup_basic_cubit.dart';
+import '../../constants/app_images.dart';
 import '../../constants/app_strings.dart';
 
 class SharedTextFieldWidget extends StatelessWidget {
@@ -26,6 +27,7 @@ class SharedTextFieldWidget extends StatelessWidget {
     required this.hintTxt,
     this.keyBoardTypeVal,
     this.obsTxtVal = false,
+    this.maxLines,
   });
 
   final TextEditingController textEditingController;
@@ -35,6 +37,7 @@ class SharedTextFieldWidget extends StatelessWidget {
   final TextInputType? keyBoardTypeVal;
   final Widget suffixIconWidget;
   final bool obsTxtVal;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +47,12 @@ class SharedTextFieldWidget extends StatelessWidget {
       style: textTheme.labelSmall?.copyWith(
         fontSize: FontSizes.size_20,
       ),
+      maxLines: maxLines ?? 1,
       keyboardType: keyBoardTypeVal,
       obscureText: obsTxtVal,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
-          vertical: BorderRadii.size_18,
+          vertical: BorderRadii.size_16,
           horizontal: BorderRadii.size_30,
         ),
         errorStyle: textTheme.labelSmall?.copyWith(
@@ -266,13 +270,25 @@ class SharedDropDownWidget extends StatelessWidget {
           ),
           items: items
               .map(
-                (String item) => DropdownMenuItem<String>(
-                  value: item,
-                  child: Text(
-                    item,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
+                (String item) => item.startsWith('-')
+                    ? DropdownMenuItem<String>(
+                        value: item,
+                        enabled: false,
+                        child: Text(
+                          item,
+                          style: TextStyle(
+                            color: AppColors.black.withOpacity(0.4),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      )
+                    : DropdownMenuItem<String>(
+                        value: item,
+                        child: Text(
+                          item,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
               )
               .toList(),
           value: selectedValue,
@@ -711,6 +727,127 @@ class SharedShadowContainerWidget extends StatelessWidget {
           color: AppColors.black,
           fontSize: FontSizes.size_14,
         ),
+      ),
+    );
+  }
+}
+
+Future<dynamic> sharedLoadingIndicatorWidget(BuildContext context,
+    double screenHeight, double screenWidth, Color indicatorColor) {
+  return showDialog(
+    context: context,
+    builder: (context) => SizedBox(
+      height: screenHeight,
+      width: screenWidth,
+      child: Center(
+        child: SizedBox(
+          height: 30.0,
+          width: 30.0,
+          child: CircularProgressIndicator(
+            color: indicatorColor,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+class sharedContainerProfileWidget extends StatelessWidget {
+  const sharedContainerProfileWidget({
+    super.key,
+    required this.screenWidth,
+    required this.screenHeight,
+    required this.userName,
+    required this.textTheme,
+    required this.age,
+    required this.place,
+    required this.occupation,
+  });
+
+  final double screenWidth;
+  final double screenHeight;
+  final String userName;
+  final TextTheme textTheme;
+  final String age;
+  final String place;
+  final String occupation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: screenWidth,
+      height: screenHeight * 0.15,
+      decoration: BoxDecoration(
+        color: AppColors.lightBlue,
+        borderRadius: BorderRadius.circular(BorderRadii.size_18),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withOpacity(0.3),
+            offset: const Offset(-2, 8),
+            blurRadius: BorderRadii.size_18,
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: screenWidth * 0.22,
+            height: screenHeight * 0.11,
+            margin: const EdgeInsets.only(left: 18, top: 18),
+            decoration: BoxDecoration(
+              image: const DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(AppImages.demoProfileImg),
+              ),
+              color: AppColors.lightBlue,
+              borderRadius: BorderRadius.circular(BorderRadii.size_14),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(BorderRadii.size_18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  userName,
+                  style: textTheme.displaySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: FontSizes.size_24,
+                  ),
+                ),
+                Text(
+                  "${age} | ${place}",
+                  style: textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w300,
+                    fontSize: FontSizes.size_18,
+                  ),
+                ),
+                Text(
+                  occupation,
+                  style: textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w300,
+                    fontSize: FontSizes.size_18,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            width: BorderRadii.size_8,
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Padding(
+              padding: const EdgeInsets.only(top: BorderRadii.size_14),
+              child: Icon(
+                Icons.arrow_forward_ios,
+                color: AppColors.black.withOpacity(0.5),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

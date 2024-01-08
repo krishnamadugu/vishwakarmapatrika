@@ -11,18 +11,17 @@ class HomeCubit extends Cubit<TempListMode> {
   }
 }
 
-// class HomeOverallCubit extends Cubit<List<TempListMode>> {
-//   HomeOverallCubit() : super([]);
-//
-//   void checkUncheckCart(int index) {
-//     if (!state[index].isSelected) {
-//       state[index].isSelected =
-//           !state[index].isSelected;
-//       emit(state);
-//     } else {
-//       state.items?.elementAt(index).isSelected =
-//           !state.[index].isSelected;
-//       emit(state.copyWith(items: state.items));
-//     }
-//   }
-// }
+class HomeOverallCubit extends Cubit<List<TempListMode>> {
+  HomeOverallCubit() : super([]);
+
+  void checkUncheckCart(int index) {
+    if (!state[index].isSelected) {
+      state[index].isSelected = !state[index].isSelected;
+      emit(state);
+    } else {
+      // state.items?.elementAt(index).isSelected =
+      //     !state.[index].isSelected;
+      // emit(state.copyWith(items: state.items));
+    }
+  }
+}
