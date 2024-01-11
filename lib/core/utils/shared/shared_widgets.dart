@@ -41,43 +41,56 @@ class SharedTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: textEditingController,
-      validator: validatorFunction,
-      style: textTheme.labelSmall?.copyWith(
-        fontSize: FontSizes.size_20,
-      ),
-      maxLines: maxLines ?? 1,
-      keyboardType: keyBoardTypeVal,
-      obscureText: obsTxtVal,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: BorderRadii.size_16,
-          horizontal: BorderRadii.size_30,
-        ),
-        errorStyle: textTheme.labelSmall?.copyWith(
-          fontSize: FontSizes.size_14,
-          fontWeight: FontWeight.w600,
-          color: AppColors.primaryColor,
-        ),
-        hintText: hintTxt,
-        hintStyle: textTheme.labelSmall?.copyWith(
-          fontSize: FontSizes.size_20,
-          fontWeight: FontWeight.w300,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(
-            BorderRadii.size_20,
-          ),
-          borderSide: const BorderSide(
-            color: AppColors.textFieldBorderColor,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: BorderRadii.size_10),
+          child: Text(
+            hintTxt,
+            style: textTheme.titleMedium,
           ),
         ),
-        enabledBorder: inputTextFieldBorder(),
-        errorBorder: inputTextFieldBorder(),
-        focusedBorder: inputTextFieldBorder(),
-        suffixIcon: suffixIconWidget,
-      ),
+        SizedBox(height: 6),
+        TextFormField(
+          controller: textEditingController,
+          validator: validatorFunction,
+          style: textTheme.labelSmall?.copyWith(
+            fontSize: FontSizes.size_20,
+          ),
+          maxLines: maxLines ?? 1,
+          keyboardType: keyBoardTypeVal,
+          obscureText: obsTxtVal,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: BorderRadii.size_16,
+              horizontal: BorderRadii.size_30,
+            ),
+            errorStyle: textTheme.labelSmall?.copyWith(
+              fontSize: FontSizes.size_14,
+              fontWeight: FontWeight.w600,
+              color: AppColors.primaryColor,
+            ),
+            hintText: hintTxt,
+            hintStyle: textTheme.labelSmall?.copyWith(
+              fontSize: FontSizes.size_20,
+              fontWeight: FontWeight.w300,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(
+                BorderRadii.size_20,
+              ),
+              borderSide: const BorderSide(
+                color: AppColors.textFieldBorderColor,
+              ),
+            ),
+            enabledBorder: inputTextFieldBorder(),
+            errorBorder: inputTextFieldBorder(),
+            focusedBorder: inputTextFieldBorder(),
+            suffixIcon: suffixIconWidget,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -259,91 +272,104 @@ class SharedDropDownWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: BorderRadii.size_10,
       ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton2<String>(
-          isExpanded: true,
-          hint: Text(
-            hintText,
-            style: textTheme.bodyMedium?.copyWith(
-              fontSize: FontSizes.size_13,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: BorderRadii.size_10),
+            child: Text(
+              hintText,
+              style: textTheme.titleMedium,
             ),
           ),
-          items: items
-              .map(
-                (String item) => item.startsWith('-')
-                    ? DropdownMenuItem<String>(
-                        value: item,
-                        enabled: false,
-                        child: Text(
-                          item,
-                          style: TextStyle(
-                            color: AppColors.black.withOpacity(0.4),
+          SizedBox(height: 6),
+          DropdownButtonHideUnderline(
+            child: DropdownButton2<String>(
+              isExpanded: true,
+              hint: Text(
+                hintText,
+                style: textTheme.bodyMedium?.copyWith(
+                  fontSize: FontSizes.size_13,
+                ),
+              ),
+              items: items
+                  .map(
+                    (String item) => item.startsWith('-')
+                        ? DropdownMenuItem<String>(
+                            value: item,
+                            enabled: false,
+                            child: Text(
+                              item,
+                              style: TextStyle(
+                                color: AppColors.black.withOpacity(0.4),
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )
+                        : DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      )
-                    : DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-              )
-              .toList(),
-          value: selectedValue,
-          onChanged: onChangedFun,
-          buttonStyleData: ButtonStyleData(
-            height: screenHeight * 0.055,
-            width: screenWidth * 0.5,
-            padding: const EdgeInsets.symmetric(
-              horizontal: BorderRadii.size_14,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                BorderRadii.size_14,
+                  )
+                  .toList(),
+              value: selectedValue,
+              onChanged: onChangedFun,
+              buttonStyleData: ButtonStyleData(
+                height: screenHeight * 0.055,
+                width: screenWidth * 0.5,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: BorderRadii.size_14,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    BorderRadii.size_14,
+                  ),
+                  border: Border.all(
+                    color: AppColors.lightRed,
+                  ),
+                  // color: Colors.redAccent,
+                ),
+                //elevation: 2,
               ),
-              border: Border.all(
-                color: AppColors.lightRed,
+              iconStyleData: const IconStyleData(
+                icon: Icon(
+                  Icons.keyboard_arrow_down,
+                ),
+                iconSize: BorderRadii.size_28,
               ),
-              // color: Colors.redAccent,
-            ),
-            //elevation: 2,
-          ),
-          iconStyleData: const IconStyleData(
-            icon: Icon(
-              Icons.keyboard_arrow_down,
-            ),
-            iconSize: BorderRadii.size_28,
-          ),
-          dropdownStyleData: DropdownStyleData(
-            maxHeight: screenHeight * 0.2,
-            width: screenWidth * 0.4,
-            useRootNavigator: true,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                BorderRadii.size_14,
+              dropdownStyleData: DropdownStyleData(
+                maxHeight: screenHeight * 0.2,
+                width: screenWidth * 0.4,
+                useRootNavigator: true,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    BorderRadii.size_14,
+                  ),
+                ),
+                //  offset: const Offset(-20, 0),
+                scrollbarTheme: ScrollbarThemeData(
+                  radius: const Radius.circular(
+                    BorderRadii.size_40,
+                  ),
+                  thickness: MaterialStateProperty.all(
+                    BorderRadii.size_6,
+                  ),
+                  thumbVisibility: MaterialStateProperty.all(true),
+                ),
               ),
-            ),
-            //  offset: const Offset(-20, 0),
-            scrollbarTheme: ScrollbarThemeData(
-              radius: const Radius.circular(
-                BorderRadii.size_40,
+              menuItemStyleData: const MenuItemStyleData(
+                height: BorderRadii.size_40,
+                padding: EdgeInsets.only(
+                  left: BorderRadii.size_14,
+                  right: BorderRadii.size_14,
+                ),
               ),
-              thickness: MaterialStateProperty.all(
-                BorderRadii.size_6,
-              ),
-              thumbVisibility: MaterialStateProperty.all(true),
-            ),
-          ),
-          menuItemStyleData: const MenuItemStyleData(
-            height: BorderRadii.size_40,
-            padding: EdgeInsets.only(
-              left: BorderRadii.size_14,
-              right: BorderRadii.size_14,
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -762,6 +788,7 @@ class sharedContainerProfileWidget extends StatelessWidget {
     required this.age,
     required this.place,
     required this.occupation,
+    required this.containerBackgroundColor,
   });
 
   final double screenWidth;
@@ -771,83 +798,101 @@ class sharedContainerProfileWidget extends StatelessWidget {
   final String age;
   final String place;
   final String occupation;
+  final Color containerBackgroundColor;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: screenWidth,
-      height: screenHeight * 0.15,
-      decoration: BoxDecoration(
-        color: AppColors.lightBlue,
-        borderRadius: BorderRadius.circular(BorderRadii.size_18),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withOpacity(0.3),
-            offset: const Offset(-2, 8),
-            blurRadius: BorderRadii.size_18,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: screenWidth * 0.22,
-            height: screenHeight * 0.11,
-            margin: const EdgeInsets.only(left: 18, top: 18),
-            decoration: BoxDecoration(
-              image: const DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage(AppImages.demoProfileImg),
-              ),
-              color: AppColors.lightBlue,
-              borderRadius: BorderRadius.circular(BorderRadii.size_14),
+    return FittedBox(
+      fit: BoxFit.fill,
+      child: Container(
+        width: screenWidth,
+        height: screenHeight * 0.15,
+        decoration: BoxDecoration(
+          color: containerBackgroundColor,
+          borderRadius: BorderRadius.circular(BorderRadii.size_18),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black.withOpacity(0.3),
+              offset: const Offset(-2, 8),
+              blurRadius: BorderRadii.size_18,
+              spreadRadius: 1,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(BorderRadii.size_18),
-            child: Column(
+          ],
+        ),
+        child: LayoutBuilder(
+          builder: (context, boxConstraints) {
+            return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  userName,
-                  style: textTheme.displaySmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: FontSizes.size_24,
+                Container(
+                  width: screenWidth * 0.22,
+                  height: boxConstraints.maxHeight * 0.7,
+                  margin: const EdgeInsets.only(left: 18, top: 18),
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(AppImages.demoProfileImg),
+                    ),
+                    color: AppColors.lightBlue,
+                    borderRadius: BorderRadius.circular(BorderRadii.size_14),
                   ),
                 ),
-                Text(
-                  "${age} | ${place}",
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w300,
-                    fontSize: FontSizes.size_18,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(BorderRadii.size_18),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            userName,
+                            style: textTheme.displaySmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: FontSizes.size_24,
+                            ),
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            "$age years old | $place",
+                            style: textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w300,
+                              fontSize: FontSizes.size_18,
+                            ),
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            occupation,
+                            style: textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w300,
+                              fontSize: FontSizes.size_18,
+                            ),
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                Text(
-                  occupation,
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w300,
-                    fontSize: FontSizes.size_18,
+                const SizedBox(
+                  width: BorderRadii.size_8,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Padding(
+                    padding: const EdgeInsets.only(top: BorderRadii.size_14),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.black.withOpacity(0.5),
+                    ),
                   ),
                 ),
               ],
-            ),
-          ),
-          const SizedBox(
-            width: BorderRadii.size_8,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Padding(
-              padding: const EdgeInsets.only(top: BorderRadii.size_14),
-              child: Icon(
-                Icons.arrow_forward_ios,
-                color: AppColors.black.withOpacity(0.5),
-              ),
-            ),
-          ),
-        ],
+            );
+          },
+        ),
       ),
     );
   }

@@ -2,6 +2,8 @@ class AppStrings {
   //project string values
   static const String txtEmptyString = "";
   static const String txtAppName = "Vishwakarma Patrika";
+  static const String txtShortListedProfiles = "Shortlisted Profiles";
+  static const String txtChooseYourPartner = "Choose your Partner";
 
   //sign in string values
   static const String txtSplashFooter = "Find Your Partner";
@@ -30,7 +32,7 @@ class AppStrings {
   static const String txtSelectGender = "Select Gender";
   static const String txtDOB = "Date of Birth";
   static const String txtBirthTime = " Birth Time";
-  static const String txtManglikStatus = "Manglik Status";
+  static const String txtManglikStatus = "Manglik ";
   static const String txtMaritalStatus = "Marital Status";
   static const String txtProfileCreatedBy = "Created By";
   static const String txtEducation = "Education";
@@ -95,4 +97,27 @@ class AppStrings {
   static const String txtConfirmPassword = "confirm your password";
   static const String txtPasswordDontMatch =
       "Password doesn't match please check";
+
+  //home screen string values
+  static const String txtMostPopular = "Most popular";
+  static const String txtRecentlyVisited = "Recently Visited";
+  static const String txtNoDataFound = "No Data Found";
+  static const String txtSomeThingWentWrong = "something went wrong";
+  static const String txTryAgain = "Try Again";
+
+  //find partner screen String values
+  static const String txtIamLookingFor = "I am  looking for a";
+  static const String txtGroom = "Groom";
+  static const String txtBride = "Bride";
+
+  //profile screen string values
+  static const String txtAccount = "Account";
+  static const String txtMiscellaneous = "Miscellaneous";
+  static const String txtUpdateProfile = "Update Profile";
+  static const String txtChangePassword = "Change password";
+  static const String txtAboutUs = "About Us";
+  static const String txtContactUs = "Contact Us";
+  static const String txtSupportUs = "Support Us";
+  static const String txtDeleteAccount = "Delete Account";
+  static const String txtLogOut = "Log out";
 }

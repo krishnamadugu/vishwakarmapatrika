@@ -42,3 +42,9 @@ String formatTimeOfDay(TimeOfDay tod) {
   final format = DateFormat.jm();
   return format.format(dt);
 }
+
+int yearsBetween(DateTime from, DateTime to) {
+  from = DateTime(from.year, from.month, from.day);
+  to = DateTime(to.year, to.month, to.day);
+  return (to.difference(from).inHours / 24).round() ~/ 365;
+}

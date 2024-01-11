@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:vishwakarmapatrika/core/constants/app_constants.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_up/basic_details/model/form_field_list_model.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_up/basic_details/model/temp_user_profile_model.dart';

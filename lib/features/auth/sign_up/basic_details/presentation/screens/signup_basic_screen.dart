@@ -463,94 +463,107 @@ class SharedDropDownSingleWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: BorderRadii.size_10,
       ),
-      child: DropdownButtonHideUnderline(
-        child: ButtonTheme(
-          alignedDropdown: true,
-          child: DropdownButton2<String>(
-            isExpanded: true,
-            hint: Text(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: BorderRadii.size_10),
+            child: Text(
               hintText,
-              style: textTheme.bodyMedium?.copyWith(
-                fontSize: FontSizes.size_13,
-              ),
+              style: textTheme.titleMedium,
             ),
-            items: items
-                .map(
-                  (String item) => item.startsWith('-')
-                      ? DropdownMenuItem<String>(
-                          value: item,
-                          enabled: false,
-                          child: Text(
-                            item,
-                            style: TextStyle(
-                              color: AppColors.black.withOpacity(0.4),
+          ),
+          SizedBox(height: 6),
+          DropdownButtonHideUnderline(
+            child: ButtonTheme(
+              alignedDropdown: true,
+              child: DropdownButton2<String>(
+                isExpanded: true,
+                hint: Text(
+                  hintText,
+                  style: textTheme.bodyMedium?.copyWith(
+                    fontSize: FontSizes.size_13,
+                  ),
+                ),
+                items: items
+                    .map(
+                      (String item) => item.startsWith('-')
+                          ? DropdownMenuItem<String>(
+                              value: item,
+                              enabled: false,
+                              child: Text(
+                                item,
+                                style: TextStyle(
+                                  color: AppColors.black.withOpacity(0.4),
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )
+                          : DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        )
-                      : DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                )
-                .toList(),
-            value: selectedValue,
-            onChanged: onChangedFun,
-            buttonStyleData: ButtonStyleData(
-              height: screenHeight * 0.055,
-              width: screenWidth * 0.5,
-              padding: const EdgeInsets.symmetric(
-                horizontal: BorderRadii.size_14,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  BorderRadii.size_14,
+                    )
+                    .toList(),
+                value: selectedValue,
+                onChanged: onChangedFun,
+                buttonStyleData: ButtonStyleData(
+                  height: screenHeight * 0.055,
+                  width: screenWidth * 0.5,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: BorderRadii.size_14,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      BorderRadii.size_14,
+                    ),
+                    border: Border.all(
+                      color: AppColors.lightRed,
+                    ),
+                    // color: Colors.redAccent,
+                  ),
+                  //elevation: 2,
                 ),
-                border: Border.all(
-                  color: AppColors.lightRed,
+                iconStyleData: const IconStyleData(
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                  ),
+                  iconSize: BorderRadii.size_28,
                 ),
-                // color: Colors.redAccent,
-              ),
-              //elevation: 2,
-            ),
-            iconStyleData: const IconStyleData(
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-              ),
-              iconSize: BorderRadii.size_28,
-            ),
-            dropdownStyleData: DropdownStyleData(
-              maxHeight: screenHeight * 0.2,
-              width: screenWidth * 0.43,
-              useRootNavigator: true,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  BorderRadii.size_14,
+                dropdownStyleData: DropdownStyleData(
+                  maxHeight: screenHeight * 0.2,
+                  width: screenWidth * 0.43,
+                  useRootNavigator: true,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      BorderRadii.size_14,
+                    ),
+                  ),
+                  //  offset: const Offset(-20, 0),
+                  scrollbarTheme: ScrollbarThemeData(
+                    radius: const Radius.circular(
+                      BorderRadii.size_40,
+                    ),
+                    thickness: MaterialStateProperty.all(
+                      BorderRadii.size_6,
+                    ),
+                    thumbVisibility: MaterialStateProperty.all(true),
+                  ),
                 ),
-              ),
-              //  offset: const Offset(-20, 0),
-              scrollbarTheme: ScrollbarThemeData(
-                radius: const Radius.circular(
-                  BorderRadii.size_40,
+                menuItemStyleData: const MenuItemStyleData(
+                  height: BorderRadii.size_40,
+                  padding: EdgeInsets.only(
+                    left: BorderRadii.size_14,
+                    right: BorderRadii.size_14,
+                  ),
                 ),
-                thickness: MaterialStateProperty.all(
-                  BorderRadii.size_6,
-                ),
-                thumbVisibility: MaterialStateProperty.all(true),
-              ),
-            ),
-            menuItemStyleData: const MenuItemStyleData(
-              height: BorderRadii.size_40,
-              padding: EdgeInsets.only(
-                left: BorderRadii.size_14,
-                right: BorderRadii.size_14,
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

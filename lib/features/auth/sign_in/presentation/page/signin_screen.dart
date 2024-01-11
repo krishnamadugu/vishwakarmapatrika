@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vishwakarmapatrika/config/route/app_routes.dart';
 import 'package:vishwakarmapatrika/config/route/route_arguments.dart';
+import 'package:vishwakarmapatrika/core/constants/app_constraints.dart';
 import 'package:vishwakarmapatrika/core/constants/app_images.dart';
 import 'package:vishwakarmapatrika/core/constants/app_strings.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
@@ -55,12 +57,14 @@ class SignInScreen extends StatelessWidget {
         } else if (state is SignInSuccessState) {
           await sharedPref.setLoggedIn(true);
           await sharedPref.saveUserData(state.signInModel);
+          dotenv.env[AppConstraints.bearerToken] =
+              state.signInModel.authorizationToken.toString();
           if (context.mounted) {
             Navigator.pop(context);
             Navigator.pushNamedAndRemoveUntil(
               context,
-              AppRoutes.homeScreen,
-              arguments: HomeScreenArguments(state.signInModel),
+              AppRoutes.bottomNavScreen,
+              arguments: BottomNavArguments(state.signInModel),
               (Route<dynamic> route) => false,
             );
           }

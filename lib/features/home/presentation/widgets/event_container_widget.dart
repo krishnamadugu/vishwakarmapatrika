@@ -10,11 +10,13 @@ class EventContainerWidget extends StatelessWidget {
     required this.screenWidth,
     required this.screenHeight,
     required this.textTheme,
+    required this.imgProvider,
   });
 
   final double screenWidth;
   final double screenHeight;
   final TextTheme textTheme;
+  final ImageProvider imgProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +28,9 @@ class EventContainerWidget extends StatelessWidget {
           margin: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
-            image: const DecorationImage(
+            image: DecorationImage(
               fit: BoxFit.fill,
-              image: NetworkImage(
-                  "https://vivahthiruvalla.com/wp-content/uploads/2021/05/46c6469a7759c21670e83594a57fae13-1.jpeg"),
+              image: imgProvider,
             ),
           ),
         ),
@@ -54,12 +55,13 @@ class EventContainerWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: screenWidth * 0.6,
+                  width: screenWidth * 0.7,
                   child: Text(
                     'en the industry\'s standard dummy text  an unknown printer took',
                     style: textTheme.bodySmall?.copyWith(
                       color: AppColors.white,
                       fontSize: FontSizes.size_16,
+                      fontWeight: FontWeight.w300,
                     ),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,

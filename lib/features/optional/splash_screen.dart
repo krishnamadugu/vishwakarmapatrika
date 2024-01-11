@@ -5,7 +5,6 @@ import 'package:vishwakarmapatrika/core/constants/app_strings.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_in/model/signin_model.dart';
 import '../../config/route/route_arguments.dart';
 import '../../core/constants/app_constants.dart';
-import '../../main.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,8 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           Navigator.pushNamedAndRemoveUntil(
             context,
-            AppRoutes.homeScreen,
-            arguments: HomeScreenArguments(signInModel),
+            AppRoutes.bottomNavScreen,
+            arguments: BottomNavArguments(signInModel),
             (Route<dynamic> route) => false,
           );
         }

@@ -8,6 +8,7 @@ import 'package:vishwakarmapatrika/features/auth/sign_up/contact_details/present
 import 'package:vishwakarmapatrika/features/auth/sign_up/family_details/presentation/page/signup_family_screen.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_up/password_details/presentation/page/signup_password_screen.dart';
 import '../../features/auth/forgot_password/new_password/presentation/page/new_password_screen.dart';
+import '../../features/bottom_nav_bar/presentation/screen/bottom_nav_bar.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/optional/error_screen.dart';
 import 'app_routes.dart';
@@ -19,11 +20,14 @@ class RouteHandler {
 
     switch (routeName) {
       case AppRoutes.homeScreen:
-        final args = routeArgs as HomeScreenArguments;
         return MaterialPageRoute(
-          builder: (splashContext) => HomeScreen(
-            userName:
-                args.signInModel.data?.profile?.name ?? "name value is null",
+          builder: (splashContext) => HomeScreen(),
+        );
+      case AppRoutes.bottomNavScreen:
+        final args = routeArgs as BottomNavArguments;
+        return MaterialPageRoute(
+          builder: (splashContext) => BottomNavBarScreen(
+            signInModel: args.signInModel,
           ),
         );
       case AppRoutes.loginScreen:
