@@ -14,4 +14,8 @@ class AppImages {
   static const supportUsImg = 'assets/icons/Trust.svg';
   static const contactUsImg = 'assets/icons/🦆 icon _phone fill contact_.svg';
   static const deleteImg = 'assets/icons/🦆 icon _Trash_.svg';
+
+  //confirm payment app image constants
+  static const creditCardSvg = 'assets/icons/Credit_Card.svg';
+  static const upiIconSvg = 'assets/icons/Upi.svg';
 }

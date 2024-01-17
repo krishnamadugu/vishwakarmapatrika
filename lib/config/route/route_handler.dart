@@ -11,6 +11,7 @@ import '../../features/auth/forgot_password/new_password/presentation/page/new_p
 import '../../features/bottom_nav_bar/presentation/screen/bottom_nav_bar.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/optional/error_screen.dart';
+import '../../features/other_user_profile/presentation/screens/other_user_profile_screen.dart';
 import 'app_routes.dart';
 
 class RouteHandler {
@@ -70,6 +71,10 @@ class RouteHandler {
       case AppRoutes.recoverPasswordScreen:
         return MaterialPageRoute(
           builder: (forgotPasswordContext) => NewPasswordScreen(),
+        );
+      case AppRoutes.otherUserProfileScreen:
+        return MaterialPageRoute(
+          builder: (forgotPasswordContext) => OtherUserProfileScreen(),
         );
       default:
         return MaterialPageRoute(

@@ -1,8 +1,12 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,8 +16,10 @@ import 'package:vishwakarmapatrika/core/constants/theme/font_size.dart';
 import 'package:vishwakarmapatrika/core/services/api_services/native_api_service.dart';
 import 'package:vishwakarmapatrika/core/utils/shared/shared_methods.dart';
 import '../../../features/auth/sign_up/basic_details/presentation/cubit/signup_basic_cubit.dart';
+import '../../constants/app_icons.dart';
 import '../../constants/app_images.dart';
 import '../../constants/app_strings.dart';
+import '../../constants/theme/theme_constants.dart';
 
 class SharedTextFieldWidget extends StatelessWidget {
   const SharedTextFieldWidget({
@@ -896,4 +902,132 @@ class sharedContainerProfileWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+class SharedBuildCarouselSlider extends StatefulWidget {
+  late final CarouselController carouselController;
+  late final int itemCount;
+  late final List<String> imgUrl;
+  late final double screenHeight;
+
+  @override
+  State<SharedBuildCarouselSlider> createState() =>
+      _sharedBuildCarouselSliderState();
+
+  SharedBuildCarouselSlider({
+    super.key,
+    required this.carouselController,
+    required this.itemCount,
+    required this.imgUrl,
+    required this.screenHeight,
+  });
+}
+
+class _sharedBuildCarouselSliderState extends State<SharedBuildCarouselSlider> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        CarouselSlider.builder(
+          carouselController: widget.carouselController,
+          options: CarouselOptions(
+            height: 500,
+            viewportFraction: 1,
+            scrollDirection: Axis.horizontal,
+            scrollPhysics: const ScrollPhysics(),
+            enableInfiniteScroll: true,
+          ),
+          itemCount: widget.itemCount,
+          itemBuilder:
+              (BuildContext context, int itemIndex, int pageViewIndex) {
+            return CachedNetworkImage(
+              imageUrl: widget.imgUrl[itemIndex],
+              width: double.infinity,
+              height: widget.screenHeight * 0.4,
+              fit: BoxFit.fill,
+              errorWidget: (context, url, error) => const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.error_outline),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Image Not Uploaded",
+                      textAlign: TextAlign.start,
+                    )
+                  ],
+                ),
+              ),
+              progressIndicatorBuilder: (context, url, progress) =>
+                  const Center(
+                child: CircularProgressIndicator(),
+              ),
+              filterQuality: FilterQuality.medium,
+            );
+          },
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      widget.carouselController.previousPage();
+                    });
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      widget.carouselController.nextPage();
+                    });
+                  },
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+AppBar sharedAppBarWidget({
+  required String appTextName,
+  void Function()? onPressedFun,
+  List<Widget>? actionWidgets,
+}) {
+  return AppBar(
+    backgroundColor: const Color(0x00fafafa),
+    elevation: 0,
+    title: Text(
+      appTextName,
+      style: const TextStyle(
+        fontSize: FontSizes.size_20,
+        fontFamily: ThemeConstants.appLobsterTwoFontFamily,
+        fontWeight: FontWeight.normal,
+        color: AppColors.primaryColor,
+      ),
+    ),
+    actions: actionWidgets,
+  );
 }

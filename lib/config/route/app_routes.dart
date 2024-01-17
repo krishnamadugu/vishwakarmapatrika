@@ -13,4 +13,5 @@ class AppRoutes {
   static const String forgotPasswordScreen = '/forgotPasswordScreen';
   static const String otpScreen = '/otpScreen';
   static const String recoverPasswordScreen = '/recoverPasswordScreen';
+  static const String otherUserProfileScreen = '/otherUserProfileScreen';
 }

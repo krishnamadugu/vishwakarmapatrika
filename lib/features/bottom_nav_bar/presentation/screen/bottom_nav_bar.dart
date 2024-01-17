@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:vishwakarmapatrika/features/find_partner/presentation/screen/find_partner_screen.dart';
 import 'package:vishwakarmapatrika/features/home/presentation/screens/home_screen.dart';
 import 'package:vishwakarmapatrika/features/profile/presentation/screens/profile_screen.dart';
 import 'package:vishwakarmapatrika/features/shortlisted/presentation/screens/shortlisted_screen.dart';
-
 import '../../../../core/constants/theme/app_colors.dart';
 import '../../../auth/sign_in/model/signin_model.dart';
 
@@ -20,20 +18,23 @@ class BottomNavBarScreen extends StatefulWidget {
 class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   int selectedIndex = 0;
   int badge = 0;
-  final padding = EdgeInsets.symmetric(horizontal: 18, vertical: 12);
+  final padding = const EdgeInsets.symmetric(horizontal: 18, vertical: 12);
   double gap = 10;
 
   PageController controller = PageController();
 
-  List<Widget> screens = [
-    HomeScreen(),
-    ShortlistedScreen(),
-    FindPartnerScreen(),
-    ProfileScreen(),
-  ];
+  late List<Widget> screens;
 
   @override
   void initState() {
+    screens = [
+      HomeScreen(),
+      const ShortlistedScreen(),
+      FindPartnerScreen(),
+      ProfileScreen(
+        signInModel: widget.signInModel,
+      ),
+    ];
     super.initState();
   }
 
@@ -64,7 +65,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
                 spreadRadius: -10,
                 blurRadius: 60,
                 color: Colors.black.withOpacity(.4),
-                offset: Offset(0, 25),
+                offset: const Offset(0, 25),
               )
             ],
           ),

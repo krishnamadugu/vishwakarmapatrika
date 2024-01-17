@@ -25,7 +25,7 @@ import 'features/auth/sign_up/basic_details/presentation/cubit/signup_basic_cubi
 import 'features/auth/sign_up/password_details/data/repos/signup_finished_repo.dart';
 import 'features/auth/sign_up/password_details/presentation/cubit/signup_password_cubit.dart';
 import 'features/find_partner/presentation/cubit/find_partner_cubit.dart';
-import 'features/optional/splash_screen.dart';
+import 'features/other_user_profile/presentation/screens/other_user_profile_screen.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -65,7 +65,6 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<SignupBasicCubit>(
               create: (context) => SignupBasicCubit()),
-          //BlocProvider<HomeOverallCubit>(create: (context) => HomeOverallCubit()),
           BlocProvider<PasswordObscureCubit>(
               create: (context) => PasswordObscureCubit()),
           BlocProvider<SignUpPasswordCubit>(
@@ -98,7 +97,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeConfig.getThemeData(AppTheme.light),
           onGenerateRoute: RouteHandler.onGenerateRoute,
-          home: const SplashScreen(),
+          // home: const SplashScreen(),
+          home: OtherUserProfileScreen(),
         ),
       ),
     );

@@ -6,9 +6,11 @@ import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/border_radii.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/font_size.dart';
 import '../../../../core/constants/app_images.dart';
+import '../../../auth/sign_in/model/signin_model.dart';
 
 class ProfileScreen extends StatelessWidget {
-  ProfileScreen({super.key});
+  final SignInModel signInModel;
+  ProfileScreen({super.key, required this.signInModel});
 
   final List<String> accountItems = [
     AppStrings.txtUpdateProfile,
@@ -39,6 +41,8 @@ class ProfileScreen extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
 
+    String userName = signInModel.data!.profile!.name.toString();
+
     return Scaffold(
         backgroundColor: AppColors.white,
         body: SingleChildScrollView(
@@ -62,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
                 height: 20.0,
               ),
               Text(
-                "Sarita Chowhan",
+                userName,
                 style: textTheme.titleLarge?.copyWith(
                   color: AppColors.primaryColor,
                 ),

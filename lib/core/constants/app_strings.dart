@@ -120,4 +120,22 @@ class AppStrings {
   static const String txtSupportUs = "Support Us";
   static const String txtDeleteAccount = "Delete Account";
   static const String txtLogOut = "Log out";
+
+  //payment screen string values
+  static const String txtConfirmPayment = 'Confirm Payment';
+  static const String txtConfirmCheckout = 'confirm & checkout';
+  static const String txtTotalPay = 'Total Pay :';
+  static const String txtPaymentMethods = 'Payment Methods';
+  static const String txtCreditCard = 'Credit /Debit Card ';
+  static const String txtUpiPayment = 'UPI payment Methods ';
+  static const String txtPayNow = 'Pay Now';
+  static const String txtTaxes = 'Taxes & Charges :';
+  static const String txtAmountBePaid = 'Amount to be paid : ';
+
+  //filter sheet string values
+  static const String txtFilter = 'Filters';
+  static const String txtClose = 'Close';
+
+  //miscellaneous Screen string values
+  static const String txtEnterCurrentPassword = 'Enter Current Password';
 }
