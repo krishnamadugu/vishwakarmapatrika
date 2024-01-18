@@ -7,4 +7,6 @@ class ApiPaths {
   static const String getAllBridesApiUrl = '${baseUrl}getAllBrides';
   static const String getAllGroomsApiUrl = '${baseUrl}getAllGrooms';
   static const String getProfileDetailsApiUrl = '${baseUrl}getProfileDetails';
+  static const String getAboutUsDetailsApiUrl = '${baseUrl}aboutus';
+  static const String getOurTeamsApiUrl = '${baseUrl}ourteam';
 }

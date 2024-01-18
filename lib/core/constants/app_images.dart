@@ -21,4 +21,7 @@ class AppImages {
 
   //other profile screen image constants
   static const contactIconSvg = 'assets/icons/contact_svg_icon.svg';
+
+  //miscellaneous screens image constants
+  static const aboutLogoPng = 'assets/images/vkp_about_logo.png';
 }

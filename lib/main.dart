@@ -18,6 +18,8 @@ import 'package:vishwakarmapatrika/features/home/data/data_source/home_data_prov
 import 'package:vishwakarmapatrika/features/home/data/repos/home_repo.dart';
 import 'package:vishwakarmapatrika/features/home/presentation/bloc/home_bloc.dart';
 import 'package:vishwakarmapatrika/features/home/presentation/cubit/home_cubit.dart';
+import 'package:vishwakarmapatrika/features/miscellaneous/about_us/data/data_source/about_us_data_provider.dart';
+import 'package:vishwakarmapatrika/features/miscellaneous/about_us/data/repo/about_us_repo.dart';
 import 'config/route/route_handler.dart';
 import 'features/auth/sign_in/data/repos/signin_repo.dart';
 import 'features/auth/sign_up/basic_details/data/repo/form_filed_list_repo.dart';
@@ -25,8 +27,8 @@ import 'features/auth/sign_up/basic_details/presentation/cubit/signup_basic_cubi
 import 'features/auth/sign_up/password_details/data/repos/signup_finished_repo.dart';
 import 'features/auth/sign_up/password_details/presentation/cubit/signup_password_cubit.dart';
 import 'features/find_partner/presentation/cubit/find_partner_cubit.dart';
+import 'features/miscellaneous/about_us/presentation/bloc/about_us_bloc.dart';
 import 'features/optional/splash_screen.dart';
-import 'features/other_user_profile/presentation/screens/other_user_profile_screen.dart';
 
 //ignore: must_be_immutable
 void main() async {
@@ -57,6 +59,10 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) =>
               HomeRepository(homeScreenDataProvider: HomeScreenDataProvider()),
+        ),
+        RepositoryProvider(
+          create: (context) => AboutUsRepository(
+              aboutUsScreenDataProvider: AboutUsScreenDataProvider()),
         ),
         RepositoryProvider(
           create: (context) => FindPartnerRepository(
@@ -93,6 +99,13 @@ class MyApp extends StatelessWidget {
                 HomeBloc(homeRepository: context.read<HomeRepository>())
                   ..add(
                     HomeGetAllProfilesEvent(),
+                  ),
+          ),
+          BlocProvider(
+            create: (context) =>
+                AboutBloc(aboutUsRepository: context.read<AboutUsRepository>())
+                  ..add(
+                    AboutUsCallApiEvent(),
                   ),
           ),
           BlocProvider(

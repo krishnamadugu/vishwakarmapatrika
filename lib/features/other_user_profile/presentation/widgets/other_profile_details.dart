@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vishwakarmapatrika/core/constants/theme/font_size.dart';
-
 import '../../../../core/utils/shared/shared_widgets.dart';
 
 class OtherUserProfileInfoWidgets extends StatelessWidget {
