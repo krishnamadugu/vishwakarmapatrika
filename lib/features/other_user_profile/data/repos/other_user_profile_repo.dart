@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'package:flutter/material.dart';
-
 import '../data_provider/other_user_profile_data_provider.dart';
 
+//ignore: must_be_immutable
 class OtherUserProfileRepository {
   final OtherUserProfileDataProvider otherUserProfileDataProvider;
   OtherUserProfileRepository({

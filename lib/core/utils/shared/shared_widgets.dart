@@ -6,7 +6,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,7 +15,6 @@ import 'package:vishwakarmapatrika/core/constants/theme/font_size.dart';
 import 'package:vishwakarmapatrika/core/services/api_services/native_api_service.dart';
 import 'package:vishwakarmapatrika/core/utils/shared/shared_methods.dart';
 import '../../../features/auth/sign_up/basic_details/presentation/cubit/signup_basic_cubit.dart';
-import '../../constants/app_icons.dart';
 import '../../constants/app_images.dart';
 import '../../constants/app_strings.dart';
 import '../../constants/theme/theme_constants.dart';
@@ -795,6 +793,7 @@ class sharedContainerProfileWidget extends StatelessWidget {
     required this.place,
     required this.occupation,
     required this.containerBackgroundColor,
+    required this.onTap,
   });
 
   final double screenWidth;
@@ -805,6 +804,7 @@ class sharedContainerProfileWidget extends StatelessWidget {
   final String place;
   final String occupation;
   final Color containerBackgroundColor;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -886,7 +886,7 @@ class sharedContainerProfileWidget extends StatelessWidget {
                   width: BorderRadii.size_8,
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: onTap,
                   icon: Padding(
                     padding: const EdgeInsets.only(top: BorderRadii.size_14),
                     child: Icon(
@@ -1030,4 +1030,66 @@ AppBar sharedAppBarWidget({
     ),
     actions: actionWidgets,
   );
+}
+
+class SharedRowDetailContainerWidget extends StatelessWidget {
+  const SharedRowDetailContainerWidget({
+    super.key,
+    required this.basicDetailValType,
+    required this.textTheme,
+    required this.basicDetailValues,
+  });
+
+  final List<String> basicDetailValType;
+  final TextTheme textTheme;
+  final List<String> basicDetailValues;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(18.0),
+      child: ListView.builder(
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: basicDetailValType.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: Text(
+                      basicDetailValType[index],
+                      style: textTheme.titleLarge?.copyWith(
+                        fontSize: FontSizes.size_16,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 5,
+                    child: Text(
+                      "  ${basicDetailValues[index]} ",
+                      style: textTheme.titleMedium?.copyWith(
+                        fontSize: FontSizes.size_16,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
 }

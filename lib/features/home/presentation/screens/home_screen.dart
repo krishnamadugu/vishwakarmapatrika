@@ -7,6 +7,7 @@ import 'package:vishwakarmapatrika/core/utils/shared/shared_methods.dart';
 import 'package:vishwakarmapatrika/features/home/model/temp_list_model.dart';
 import 'package:vishwakarmapatrika/features/home/presentation/bloc/home_bloc.dart';
 import 'package:vishwakarmapatrika/features/home/presentation/cubit/home_cubit.dart';
+import '../../../../config/route/app_routes.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/theme/font_size.dart';
 import '../../../../core/utils/shared/shared_widgets.dart';
@@ -14,6 +15,7 @@ import '../../model/get_all_profiles_model.dart';
 import '../widgets/event_container_widget.dart';
 import '../widgets/home_app_bar_widget.dart';
 
+//ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({
     super.key,
@@ -433,6 +435,10 @@ class HomeScreen extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: BorderRadii.size_20),
                                   child: sharedContainerProfileWidget(
+                                    onTap: () {
+                                      Navigator.pushNamed(context,
+                                          AppRoutes.otherUserProfileScreen);
+                                    },
                                     screenWidth: screenWidth,
                                     screenHeight: screenHeight,
                                     userName: itemVal.name.toString(),

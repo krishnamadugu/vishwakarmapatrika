@@ -5,6 +5,7 @@ import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/constants/theme/border_radii.dart';
 import '../../../../../core/utils/shared/shared_widgets.dart';
 
+//ignore: must_be_immutable
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
 

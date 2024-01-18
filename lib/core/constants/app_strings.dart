@@ -121,6 +121,48 @@ class AppStrings {
   static const String txtDeleteAccount = "Delete Account";
   static const String txtLogOut = "Log out";
 
+  //other profile screen string values
+  static const String txtBasicDetails = "Basic Details";
+  static const String txtAcademicDetails = "Academic Details";
+  static const String txtAboutMe = "About Me";
+  static const String txtAddressDetails = "AddressDetails";
+  static const String txtPartnerPrefs = "Partner Preferred";
+
+  static const String txt_Gotra = "Gotra :";
+  static const String txt_DOB = "Date Of Birth :";
+  static const String txt_TOB = "Time Of Birth :";
+  static const String txt_Religion = "Religion :";
+  static const String txt_Manglik = "Manglik :";
+  static const String txt_Marital = "Marital Status:";
+  static const String txt_CreatedBy = "Profile Created By :";
+  static const String txt_Hobbies = "Hobbies :";
+
+  static const String txt_Education = "Education :";
+  static const String txt_EducaitonDetails = "Education Details :";
+  static const String txt_Occupation = "Occupation :";
+  static const String txt_OccupationDetails = "Occupation Details :";
+
+  static const String txt_FatherName = "Father Name :";
+  static const String txt_FatherOccupation = "Father Occupation :";
+  static const String txt_MotherName = "Mother Name :";
+  static const String txt_MotherOccupation = "Mother Occupation :";
+  static const String txt_BrotherMarried = "No. Of Brother Married :";
+  static const String txt_BrotherUnmarried = "No. Of Brother Unmarried :";
+  static const String txt_SisterMarried = "No. Of Sister Married :";
+  static const String txt_SisterUnMarried = "No. Of Sister Unmarried :";
+
+  static const String txt_Address = "Address :";
+  static const String txt_State = "State :";
+  static const String txt_City = "City :";
+  static const String txt_Location = "Location :";
+
+  static const String txt_MaritalStatus = "Marital Status :";
+  static const String txt_Age = "Age :";
+  static const String txt_Dosham = "Kujadosham / Manglik :";
+  static const String txt_PartnerEducation = "Education :";
+  static const String txt_PartnerOccupation = "Occupation :";
+  static const String txt_someOtherWords = "Some Other Words :";
+
   //payment screen string values
   static const String txtConfirmPayment = 'Confirm Payment';
   static const String txtConfirmCheckout = 'confirm & checkout';
@@ -138,4 +180,8 @@ class AppStrings {
 
   //miscellaneous Screen string values
   static const String txtEnterCurrentPassword = 'Enter Current Password';
+  static const String txtDeleteMyAccount = 'Delete My Account';
+  static const String txtNoTakeMeBack = 'No, Take me back';
+  static const String txtDeletePrompt =
+      'Are you sure you want to Delete your account permanently?';
 }

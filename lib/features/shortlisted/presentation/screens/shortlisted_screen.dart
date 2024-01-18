@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../config/route/app_routes.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/theme/app_colors.dart';
 import '../../../../core/constants/theme/border_radii.dart';
@@ -42,6 +43,10 @@ class ShortlistedScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: BorderRadii.size_20),
                         child: sharedContainerProfileWidget(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.otherUserProfileScreen);
+                          },
                           screenWidth: screenWidth,
                           screenHeight: screenHeight,
                           userName: userName,

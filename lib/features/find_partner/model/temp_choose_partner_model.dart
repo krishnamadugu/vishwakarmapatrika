@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+//ignore: must_be_immutable
 class TempChoosePartnerModel extends Equatable {
   String selectedPartner;
   TempChoosePartnerModel({required this.selectedPartner});

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vishwakarmapatrika/config/route/app_routes.dart';
+import 'package:vishwakarmapatrika/core/constants/app_constants.dart';
 import 'package:vishwakarmapatrika/core/constants/app_strings.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/border_radii.dart';
@@ -33,6 +35,15 @@ class ProfileScreen extends StatelessWidget {
     AppImages.supportUsImg,
     AppImages.deleteImg,
     AppImages.signOutImg,
+  ];
+  final List<String> navigatorAccountFunctions = [
+    AppRoutes.updateProfileScreen,
+    AppRoutes.changePasswordScreen,
+  ];
+  final List<String> navigatorMiscellaneousFunctions = [
+    AppRoutes.aboutUsScreen,
+    AppRoutes.contactUsScreen,
+    AppRoutes.supportUsScreen,
   ];
 
   @override
@@ -96,12 +107,18 @@ class ProfileScreen extends StatelessWidget {
                         physics: const ClampingScrollPhysics(),
                         itemCount: accountItems.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return SharedProfileOptionWidget(
-                            index: index,
-                            screenWidth: screenWidth,
-                            accountItemIcons: accountItemIcons,
-                            accountItems: accountItems,
-                            textTheme: textTheme,
+                          return InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, navigatorAccountFunctions[index]);
+                            },
+                            child: SharedProfileOptionWidget(
+                              index: index,
+                              screenWidth: screenWidth,
+                              accountItemIcons: accountItemIcons,
+                              accountItems: accountItems,
+                              textTheme: textTheme,
+                            ),
                           );
                         },
                       ),
@@ -118,12 +135,129 @@ class ProfileScreen extends StatelessWidget {
                       physics: const ClampingScrollPhysics(),
                       itemCount: miscellaneousItems.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return SharedProfileOptionWidget(
-                          index: index,
-                          screenWidth: screenWidth,
-                          accountItemIcons: miscellaneousItemIcons,
-                          accountItems: miscellaneousItems,
-                          textTheme: textTheme,
+                        return InkWell(
+                          onTap: () {
+                            if (index == 3) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      contentPadding: EdgeInsets.all(8.0),
+                                      title: Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              AppStrings.txtDeleteMyAccount,
+                                              style: textTheme.titleLarge
+                                                  ?.copyWith(
+                                                fontSize: FontSizes.size_20,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 18,
+                                            ),
+                                            Text(
+                                              AppStrings.txtDeletePrompt,
+                                              style: textTheme.bodyMedium
+                                                  ?.copyWith(
+                                                fontSize: FontSizes.size_16,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            SizedBox(
+                                              height: 16,
+                                            ),
+                                            Container(
+                                              width: screenWidth,
+                                              height: BorderRadii.size_58,
+                                              decoration: BoxDecoration(
+                                                color: AppColors.primaryColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  BorderRadii.size_18,
+                                                ),
+                                              ),
+                                              child: Align(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  AppStrings.txtDeleteMyAccount,
+                                                  style: textTheme.titleLarge
+                                                      ?.copyWith(
+                                                    color: AppColors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: FontSizes.size_24,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Container(
+                                                width: screenWidth,
+                                                height: BorderRadii.size_58,
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.black,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    BorderRadii.size_18,
+                                                  ),
+                                                ),
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    AppStrings.txtNoTakeMeBack,
+                                                    style: textTheme.titleLarge
+                                                        ?.copyWith(
+                                                      color: AppColors.white,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize:
+                                                          FontSizes.size_24,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(14)),
+                                    );
+                                  });
+                            } else if (index == 4) {
+                              sharedPref.logout();
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                AppRoutes.splashScreen,
+                                (route) => false,
+                              );
+                            } else {
+                              Navigator.pushNamed(context,
+                                  navigatorMiscellaneousFunctions[index]);
+                            }
+                          },
+                          child: SharedProfileOptionWidget(
+                            index: index,
+                            screenWidth: screenWidth,
+                            accountItemIcons: miscellaneousItemIcons,
+                            accountItems: miscellaneousItems,
+                            textTheme: textTheme,
+                          ),
                         );
                       },
                     ),

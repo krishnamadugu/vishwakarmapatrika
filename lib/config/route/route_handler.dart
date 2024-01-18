@@ -7,6 +7,12 @@ import 'package:vishwakarmapatrika/features/auth/sign_up/basic_details/presentat
 import 'package:vishwakarmapatrika/features/auth/sign_up/contact_details/presentation/page/signup_contact_screen.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_up/family_details/presentation/page/signup_family_screen.dart';
 import 'package:vishwakarmapatrika/features/auth/sign_up/password_details/presentation/page/signup_password_screen.dart';
+import 'package:vishwakarmapatrika/features/miscellaneous/about_us/presentation/screen/about_us_screen.dart';
+import 'package:vishwakarmapatrika/features/miscellaneous/change_password/presentation/screen/change_pwd_screen.dart';
+import 'package:vishwakarmapatrika/features/miscellaneous/contact_us/presentation/screen/contact_us_screen.dart';
+import 'package:vishwakarmapatrika/features/miscellaneous/support_us/presentation/screen/support_us_screen.dart';
+import 'package:vishwakarmapatrika/features/miscellaneous/update_profile/presentation/screen/update_profile_screen.dart';
+import 'package:vishwakarmapatrika/features/payment/presentation/screens/payment_screen.dart';
 import '../../features/auth/forgot_password/new_password/presentation/page/new_password_screen.dart';
 import '../../features/bottom_nav_bar/presentation/screen/bottom_nav_bar.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
@@ -74,12 +80,37 @@ class RouteHandler {
         );
       case AppRoutes.otherUserProfileScreen:
         return MaterialPageRoute(
-          builder: (forgotPasswordContext) => OtherUserProfileScreen(),
+          builder: (forgotPasswordContext) => const OtherUserProfileScreen(),
+        );
+      case AppRoutes.changePasswordScreen:
+        return MaterialPageRoute(
+          builder: (forgotPasswordContext) => ChangePasswordScreen(),
+        );
+      case AppRoutes.updateProfileScreen:
+        return MaterialPageRoute(
+          builder: (forgotPasswordContext) => UpdateProfileScreen(),
+        );
+      case AppRoutes.paymentScreen:
+        return MaterialPageRoute(
+          builder: (forgotPasswordContext) => PaymentScreen(),
+        );
+      case AppRoutes.aboutUsScreen:
+        return MaterialPageRoute(
+          builder: (forgotPasswordContext) => AboutUsScreen(),
+        );
+      case AppRoutes.supportUsScreen:
+        return MaterialPageRoute(
+          builder: (forgotPasswordContext) => SupportUsScreen(),
+        );
+      case AppRoutes.contactUsScreen:
+        return MaterialPageRoute(
+          builder: (forgotPasswordContext) => ContactUsScreen(),
         );
       default:
         return MaterialPageRoute(
-            builder: (errorContext) =>
-                ErrorScreen(routeName: routeName.toString()));
+          builder: (errorContext) =>
+              ErrorScreen(routeName: routeName.toString()),
+        );
     }
   }
 }

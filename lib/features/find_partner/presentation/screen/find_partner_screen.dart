@@ -6,6 +6,7 @@ import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
 import 'package:vishwakarmapatrika/features/find_partner/model/get_all_partners_model.dart';
 import 'package:vishwakarmapatrika/features/find_partner/presentation/cubit/find_partner_cubit.dart';
 
+import '../../../../config/route/app_routes.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/theme/border_radii.dart';
@@ -15,6 +16,7 @@ import '../../../home/presentation/widgets/home_app_bar_widget.dart';
 import '../../model/temp_choose_partner_model.dart';
 import '../bloc/find_partner_bloc.dart';
 
+//ignore: must_be_immutable
 class FindPartnerScreen extends StatelessWidget {
   FindPartnerScreen({super.key});
 
@@ -226,6 +228,10 @@ class FindPartnerScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: BorderRadii.size_20),
                                 child: sharedContainerProfileWidget(
+                                  onTap: () {
+                                    Navigator.pushNamed(context,
+                                        AppRoutes.otherUserProfileScreen);
+                                  },
                                   screenWidth: screenWidth,
                                   screenHeight: screenHeight,
                                   userName: itemVal.name.toString(),

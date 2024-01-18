@@ -18,4 +18,7 @@ class AppImages {
   //confirm payment app image constants
   static const creditCardSvg = 'assets/icons/Credit_Card.svg';
   static const upiIconSvg = 'assets/icons/Upi.svg';
+
+  //other profile screen image constants
+  static const contactIconSvg = 'assets/icons/contact_svg_icon.svg';
 }

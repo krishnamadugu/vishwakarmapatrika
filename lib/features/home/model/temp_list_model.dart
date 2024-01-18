@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-//ignore : must_ignore_immutable
+//ignore: must_be_immutable
 class TempListMode extends Equatable {
   late bool isFirstSelected;
   late bool isSecondSelected;

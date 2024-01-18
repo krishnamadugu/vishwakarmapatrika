@@ -25,8 +25,10 @@ import 'features/auth/sign_up/basic_details/presentation/cubit/signup_basic_cubi
 import 'features/auth/sign_up/password_details/data/repos/signup_finished_repo.dart';
 import 'features/auth/sign_up/password_details/presentation/cubit/signup_password_cubit.dart';
 import 'features/find_partner/presentation/cubit/find_partner_cubit.dart';
+import 'features/optional/splash_screen.dart';
 import 'features/other_user_profile/presentation/screens/other_user_profile_screen.dart';
 
+//ignore: must_be_immutable
 void main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,10 +78,11 @@ class MyApp extends StatelessWidget {
               create: (context) => SignUpFamilyCubit()),
           BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
           BlocProvider(
-              create: (context) => SignInBloc(
-                    context.read<SingInRepository>(),
-                    context.read<FormFieldListRepository>(),
-                  )),
+            create: (context) => SignInBloc(
+              context.read<SingInRepository>(),
+              context.read<FormFieldListRepository>(),
+            ),
+          ),
           BlocProvider(
             create: (context) => FindPartnerBloc(
                 findPartnerRepository: context.read<FindPartnerRepository>())
@@ -88,17 +91,20 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 HomeBloc(homeRepository: context.read<HomeRepository>())
-                  ..add(HomeGetAllProfilesEvent()),
+                  ..add(
+                    HomeGetAllProfilesEvent(),
+                  ),
           ),
-          BlocProvider(create: (context) => FindPartnerCubit()),
+          BlocProvider(
+            create: (context) => FindPartnerCubit(),
+          ),
         ],
         child: MaterialApp(
           title: AppStrings.txtAppName,
           debugShowCheckedModeBanner: false,
           theme: ThemeConfig.getThemeData(AppTheme.light),
           onGenerateRoute: RouteHandler.onGenerateRoute,
-          // home: const SplashScreen(),
-          home: OtherUserProfileScreen(),
+          home: const SplashScreen(),
         ),
       ),
     );
