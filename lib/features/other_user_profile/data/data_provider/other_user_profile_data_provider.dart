@@ -10,8 +10,8 @@ class OtherUserProfileDataProvider {
   Future<Map<String, dynamic>> getOtherUserData(
       {required String loggedUserId, required String id}) async {
     var formData = dio.FormData.fromMap({
-      'userId': loggedUserId,
-      'password': id,
+      'loggedUserId': loggedUserId,
+      'id': id,
     });
 
     Map<String, String>? headerOptions = {

@@ -11,4 +11,7 @@ final class OtherProfileFailureState extends OtherProfileState {
   OtherProfileFailureState({required this.errorMsg});
 }
 
-final class OtherProfileSuccessState extends OtherProfileState {}
+final class OtherProfileSuccessState extends OtherProfileState {
+  final OtherProfileModel getOtherUserProfileData;
+  OtherProfileSuccessState({required this.getOtherUserProfileData});
+}

@@ -28,7 +28,9 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   @override
   void initState() {
     screens = [
-      HomeScreen(),
+      HomeScreen(
+        userId: widget.signInModel.data!.profile!.id.toString(),
+      ),
       const ShortlistedScreen(),
       FindPartnerScreen(),
       ProfileScreen(

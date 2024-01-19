@@ -20,6 +20,9 @@ import 'package:vishwakarmapatrika/features/home/presentation/bloc/home_bloc.dar
 import 'package:vishwakarmapatrika/features/home/presentation/cubit/home_cubit.dart';
 import 'package:vishwakarmapatrika/features/miscellaneous/about_us/data/data_source/about_us_data_provider.dart';
 import 'package:vishwakarmapatrika/features/miscellaneous/about_us/data/repo/about_us_repo.dart';
+import 'package:vishwakarmapatrika/features/other_user_profile/data/data_provider/other_user_profile_data_provider.dart';
+import 'package:vishwakarmapatrika/features/other_user_profile/data/repos/other_user_profile_repo.dart';
+import 'package:vishwakarmapatrika/features/other_user_profile/presentation/bloc/other_profile_bloc.dart';
 import 'config/route/route_handler.dart';
 import 'features/auth/sign_in/data/repos/signin_repo.dart';
 import 'features/auth/sign_up/basic_details/data/repo/form_filed_list_repo.dart';
@@ -67,7 +70,11 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => FindPartnerRepository(
               findPartnerScreenDataProvider: FindPartnerDataProvider()),
-        )
+        ),
+        RepositoryProvider(
+          create: (context) => OtherUserProfileRepository(
+              otherUserProfileDataProvider: OtherUserProfileDataProvider()),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -108,6 +115,10 @@ class MyApp extends StatelessWidget {
                     AboutUsCallApiEvent(),
                   ),
           ),
+          BlocProvider(
+              create: (context) => OtherProfileBloc(
+                  otherUserProfileRepository:
+                      context.read<OtherUserProfileRepository>())),
           BlocProvider(
             create: (context) => FindPartnerCubit(),
           ),

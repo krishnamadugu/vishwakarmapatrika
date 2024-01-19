@@ -10,3 +10,17 @@ class BasicSignUpDetailsArguments {
   final FormFieldListDataModel formFieldListDataModel;
   BasicSignUpDetailsArguments(this.formFieldListDataModel);
 }
+
+class HomeArguments {
+  final String id;
+  HomeArguments({required this.id});
+}
+
+class OtherUserProfileArguments {
+  final String loggedUserId;
+  final String otherUserId;
+  OtherUserProfileArguments({
+    required this.loggedUserId,
+    required this.otherUserId,
+  });
+}

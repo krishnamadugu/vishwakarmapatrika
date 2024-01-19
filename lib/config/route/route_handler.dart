@@ -27,8 +27,11 @@ class RouteHandler {
 
     switch (routeName) {
       case AppRoutes.homeScreen:
+        final args = routeArgs as HomeArguments;
         return MaterialPageRoute(
-          builder: (splashContext) => HomeScreen(),
+          builder: (splashContext) => HomeScreen(
+            userId: args.id,
+          ),
         );
       case AppRoutes.bottomNavScreen:
         final args = routeArgs as BottomNavArguments;
@@ -79,8 +82,12 @@ class RouteHandler {
           builder: (forgotPasswordContext) => NewPasswordScreen(),
         );
       case AppRoutes.otherUserProfileScreen:
+        final args = routeArgs as OtherUserProfileArguments;
         return MaterialPageRoute(
-          builder: (forgotPasswordContext) => const OtherUserProfileScreen(),
+          builder: (forgotPasswordContext) => OtherUserProfileScreen(
+            loggedUserId: args.loggedUserId,
+            otherUserId: args.otherUserId,
+          ),
         );
       case AppRoutes.changePasswordScreen:
         return MaterialPageRoute(

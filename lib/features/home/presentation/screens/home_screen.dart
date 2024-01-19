@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vishwakarmapatrika/config/route/route_arguments.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/app_colors.dart';
 import 'package:vishwakarmapatrika/core/constants/theme/border_radii.dart';
 import 'package:vishwakarmapatrika/core/utils/shared/shared_methods.dart';
 import 'package:vishwakarmapatrika/features/home/model/temp_list_model.dart';
 import 'package:vishwakarmapatrika/features/home/presentation/bloc/home_bloc.dart';
 import 'package:vishwakarmapatrika/features/home/presentation/cubit/home_cubit.dart';
+import 'package:vishwakarmapatrika/features/other_user_profile/presentation/bloc/other_profile_bloc.dart';
 import '../../../../config/route/app_routes.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/theme/font_size.dart';
@@ -17,7 +19,9 @@ import '../widgets/home_app_bar_widget.dart';
 
 //ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
+  final String userId;
   HomeScreen({
+    required this.userId,
     super.key,
   });
 
@@ -436,8 +440,16 @@ class HomeScreen extends StatelessWidget {
                                       horizontal: BorderRadii.size_20),
                                   child: sharedContainerProfileWidget(
                                     onTap: () {
-                                      Navigator.pushNamed(context,
-                                          AppRoutes.otherUserProfileScreen);
+                                      Navigator.pushNamed(
+                                        context,
+                                        AppRoutes.otherUserProfileScreen,
+                                        arguments: OtherUserProfileArguments(
+                                          loggedUserId: userId,
+                                          otherUserId: getUserProfiles!
+                                              .data![index].id
+                                              .toString(),
+                                        ),
+                                      );
                                     },
                                     screenWidth: screenWidth,
                                     screenHeight: screenHeight,
