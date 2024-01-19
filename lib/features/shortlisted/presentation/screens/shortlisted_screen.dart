@@ -49,6 +49,8 @@ class ShortlistedScreen extends StatelessWidget {
                           },
                           screenWidth: screenWidth,
                           screenHeight: screenHeight,
+                          imgUrl:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIl8Nh-RoO-XLKCV6ua42qMEEgTQR0IllqukJp1F3-Hw&s",
                           userName: userName,
                           textTheme: textTheme,
                           age: age,

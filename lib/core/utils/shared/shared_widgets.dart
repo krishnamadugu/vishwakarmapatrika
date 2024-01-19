@@ -794,6 +794,7 @@ class sharedContainerProfileWidget extends StatelessWidget {
     required this.occupation,
     required this.containerBackgroundColor,
     required this.onTap,
+    required this.imgUrl,
   });
 
   final double screenWidth;
@@ -803,6 +804,7 @@ class sharedContainerProfileWidget extends StatelessWidget {
   final String age;
   final String place;
   final String occupation;
+  final String imgUrl;
   final Color containerBackgroundColor;
   final void Function()? onTap;
 
@@ -830,18 +832,24 @@ class sharedContainerProfileWidget extends StatelessWidget {
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: screenWidth * 0.22,
-                  height: boxConstraints.maxHeight * 0.7,
-                  margin: const EdgeInsets.only(left: 18, top: 18),
-                  decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(AppImages.demoProfileImg),
+                CachedNetworkImage(
+                  imageUrl: imgUrl,
+                  imageBuilder: (context, imageProvider) => Container(
+                    width: screenWidth * 0.22,
+                    height: boxConstraints.maxHeight * 0.7,
+                    margin: const EdgeInsets.only(left: 18, top: 18),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: imageProvider,
+                      ),
+                      color: AppColors.lightBlue,
+                      borderRadius: BorderRadius.circular(BorderRadii.size_14),
                     ),
-                    color: AppColors.lightBlue,
-                    borderRadius: BorderRadius.circular(BorderRadii.size_14),
                   ),
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
                 Expanded(
                   child: Padding(

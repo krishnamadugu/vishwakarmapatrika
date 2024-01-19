@@ -182,6 +182,10 @@ class AppStrings {
   static const String txtEnterCurrentPassword = 'Enter Current Password';
   static const String txtDeleteMyAccount = 'Delete My Account';
   static const String txtNoTakeMeBack = 'No, Take me back';
+  static const String txtDonateUs = 'Donate Us';
+  static const String txtSend = 'Send';
+  static const String txtSupportUsPrompt =
+      'You can support our idea by donating some amount . Thank you for helping us keeping Vishwakarma Patrika Ad free and for making this service even better ';
   static const String txtDeletePrompt =
       'Are you sure you want to Delete your account permanently?';
 }

@@ -11,8 +11,19 @@ import 'package:vishwakarmapatrika/features/miscellaneous/about_us/presentation/
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/utils/shared/shared_widgets.dart';
 
-class AboutUsScreen extends StatelessWidget {
+class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({super.key});
+
+  @override
+  State<AboutUsScreen> createState() => _AboutUsScreenState();
+}
+
+class _AboutUsScreenState extends State<AboutUsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<AboutBloc>(context).add(AboutUsCallApiEvent());
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -451,6 +451,8 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                       );
                                     },
+                                    imgUrl:
+                                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIl8Nh-RoO-XLKCV6ua42qMEEgTQR0IllqukJp1F3-Hw&s",
                                     screenWidth: screenWidth,
                                     screenHeight: screenHeight,
                                     userName: itemVal.name.toString(),

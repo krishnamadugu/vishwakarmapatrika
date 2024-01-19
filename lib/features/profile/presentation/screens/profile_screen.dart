@@ -63,21 +63,26 @@ class ProfileScreen extends StatelessWidget {
                 height: 40.0,
               ),
               CachedNetworkImage(
-                imageUrl:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIl8Nh-RoO-XLKCV6ua42qMEEgTQR0IllqukJp1F3-Hw&s",
+                imageUrl: signInModel.data!.profile!.profileImage.toString(),
                 imageBuilder: (context, imageProvider) => CircleAvatar(
                   radius: 60,
                   backgroundImage: imageProvider,
                 ),
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+                errorWidget: (context, url, error) => const CircleAvatar(
+                  radius: 60,
+                  backgroundImage: NetworkImage(
+                      "https://templates.joomla-monster.com/joomla30/jm-news-portal/components/com_djclassifieds/assets/images/default_profile.png"),
+                ),
               ),
               const SizedBox(
                 height: 20.0,
               ),
               Text(
-                userName,
+                signInModel.data != null || signInModel.data!.profile != null
+                    ? userName
+                    : "Name not Provided",
                 style: textTheme.titleLarge?.copyWith(
                   color: AppColors.primaryColor,
                 ),
