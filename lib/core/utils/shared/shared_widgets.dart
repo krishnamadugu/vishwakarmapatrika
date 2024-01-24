@@ -15,7 +15,6 @@ import 'package:vishwakarmapatrika/core/constants/theme/font_size.dart';
 import 'package:vishwakarmapatrika/core/services/api_services/native_api_service.dart';
 import 'package:vishwakarmapatrika/core/utils/shared/shared_methods.dart';
 import '../../../features/auth/sign_up/basic_details/presentation/cubit/signup_basic_cubit.dart';
-import '../../constants/app_images.dart';
 import '../../constants/app_strings.dart';
 import '../../constants/theme/theme_constants.dart';
 

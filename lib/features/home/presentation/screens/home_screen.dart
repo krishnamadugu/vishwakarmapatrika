@@ -8,7 +8,6 @@ import 'package:vishwakarmapatrika/core/utils/shared/shared_methods.dart';
 import 'package:vishwakarmapatrika/features/home/model/temp_list_model.dart';
 import 'package:vishwakarmapatrika/features/home/presentation/bloc/home_bloc.dart';
 import 'package:vishwakarmapatrika/features/home/presentation/cubit/home_cubit.dart';
-import 'package:vishwakarmapatrika/features/other_user_profile/presentation/bloc/other_profile_bloc.dart';
 import '../../../../config/route/app_routes.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/theme/font_size.dart';
@@ -73,256 +72,13 @@ class HomeScreen extends StatelessWidget {
           appBar: homeAppBarWidget(
             appTextName: AppStrings.txtAppName,
             onPressedFun: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) => Container(
-                    margin: const EdgeInsets.all(20.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 16.0,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                AppStrings.txtFilter,
-                                style: textTheme.bodyLarge,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  AppStrings.txtClose,
-                                  style: textTheme.bodyLarge,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              bottom: 10.0,
-                            ),
-                            child: Divider(),
-                          ),
-                          SingleChildScrollView(
-                            child: BlocBuilder<HomeCubit, TempListMode>(
-                              builder: (context, state) {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                            width: screenWidth * 0.4,
-                                            height: screenHeight * 0.5,
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 4),
-                                            color: AppColors.lightRed
-                                                .withOpacity(0.1),
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              physics: ClampingScrollPhysics(),
-                                              itemCount: categoryItems.length,
-                                              itemBuilder: (context, index) {
-                                                return SingleChildScrollView(
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      BlocProvider.of<
-                                                                  HomeCubit>(
-                                                              context)
-                                                          .onCategoryTapped(
-                                                              index);
-                                                    },
-                                                    child: Container(
-                                                      color:
-                                                          state.categoryIndexTapped ==
-                                                                  index
-                                                              ? AppColors.white
-                                                              : AppColors
-                                                                  .lightRed
-                                                                  .withOpacity(
-                                                                      0.1),
-                                                      padding:
-                                                          EdgeInsets.all(20.0),
-                                                      child: Text(
-                                                        categoryItems[index],
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        softWrap: true,
-                                                        maxLines: 2,
-                                                        style: textTheme
-                                                            .bodyMedium
-                                                            ?.copyWith(
-                                                          fontSize: 18.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 20.0,
-                                        ),
-                                        Expanded(
-                                          flex: 3,
-                                          child: SizedBox(
-                                            height: screenHeight * 0.5,
-                                            child: SingleChildScrollView(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    categoryItems[state
-                                                        .categoryIndexTapped],
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    textAlign: TextAlign.start,
-                                                    softWrap: true,
-                                                    maxLines: 2,
-                                                    style: textTheme.bodyMedium
-                                                        ?.copyWith(
-                                                      fontSize: 18.0,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: AppColors
-                                                          .primaryColor,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: screenWidth * 0.5,
-                                                    child: ListView.builder(
-                                                        shrinkWrap: true,
-                                                        physics:
-                                                            ClampingScrollPhysics(),
-                                                        itemCount:
-                                                            subCategoryItems
-                                                                .length,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return CheckboxListTile(
-                                                            title: Text(
-                                                              subCategoryItems[
-                                                                  index],
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                              softWrap: true,
-                                                              maxLines: 2,
-                                                              style: textTheme
-                                                                  .bodyMedium
-                                                                  ?.copyWith(
-                                                                fontSize: 16.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
-                                                              ),
-                                                            ),
-                                                            value: state.selectedListIndex !=
-                                                                        null &&
-                                                                    state
-                                                                        .selectedListIndex!
-                                                                        .contains(
-                                                                            index)
-                                                                ? true
-                                                                : false,
-                                                            onChanged:
-                                                                (newValue) {
-                                                              var tempList = state
-                                                                  .selectedListIndex;
-                                                              if (tempList !=
-                                                                  null) {
-                                                                if (newValue ==
-                                                                    true) {
-                                                                  tempList.add(
-                                                                      index);
-                                                                  BlocProvider.of<
-                                                                              HomeCubit>(
-                                                                          context)
-                                                                      .onSubCategoryTapped(
-                                                                          tempList);
-                                                                } else {
-                                                                  tempList
-                                                                      .remove(
-                                                                          index);
-                                                                  BlocProvider.of<
-                                                                              HomeCubit>(
-                                                                          context)
-                                                                      .onSubCategoryTapped(
-                                                                          tempList);
-                                                                }
-                                                              } else {
-                                                                tempList = [
-                                                                  index
-                                                                ];
-                                                                BlocProvider.of<
-                                                                            HomeCubit>(
-                                                                        context)
-                                                                    .onSubCategoryTapped(
-                                                                        tempList);
-                                                              }
-                                                            },
-                                                            controlAffinity:
-                                                                ListTileControlAffinity
-                                                                    .leading, //  <-- leading Checkbox
-                                                          );
-                                                        }),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                          Divider(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                width: screenWidth * 0.4,
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(12.0),
-                                margin: EdgeInsets.all(20.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(24.0),
-                                  color: AppColors.primaryColor,
-                                ),
-                                child: Text(
-                                  "show  results",
-                                  style: textTheme.bodyLarge?.copyWith(
-                                    color: AppColors.white,
-                                    fontSize: FontSizes.size_16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
+              filterShowModalBottomSheet(
+                context,
+                textTheme,
+                screenWidth,
+                screenHeight,
+                categoryItems,
+                subCategoryItems,
               );
             },
           ),
@@ -485,6 +241,234 @@ class HomeScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Future<dynamic> filterShowModalBottomSheet(
+      BuildContext context,
+      TextTheme textTheme,
+      double screenWidth,
+      double screenHeight,
+      List<String> categoryItems,
+      List<String> subCategoryItems) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+          margin: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppStrings.txtFilter,
+                      style: textTheme.bodyLarge,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        AppStrings.txtClose,
+                        style: textTheme.bodyLarge,
+                      ),
+                    ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(
+                    bottom: 10.0,
+                  ),
+                  child: Divider(),
+                ),
+                SingleChildScrollView(
+                  child: BlocBuilder<HomeCubit, TempListMode>(
+                    builder: (context, state) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  width: screenWidth * 0.4,
+                                  height: screenHeight * 0.5,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 4),
+                                  color: AppColors.lightRed.withOpacity(0.1),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const ClampingScrollPhysics(),
+                                    itemCount: categoryItems.length,
+                                    itemBuilder: (context, index) {
+                                      return SingleChildScrollView(
+                                        child: InkWell(
+                                          onTap: () {
+                                            BlocProvider.of<HomeCubit>(context)
+                                                .onCategoryTapped(index);
+                                          },
+                                          child: Container(
+                                            color: state.categoryIndexTapped ==
+                                                    index
+                                                ? AppColors.white
+                                                : AppColors.lightRed
+                                                    .withOpacity(0.1),
+                                            padding: const EdgeInsets.all(20.0),
+                                            child: Text(
+                                              categoryItems[index],
+                                              overflow: TextOverflow.ellipsis,
+                                              softWrap: true,
+                                              maxLines: 2,
+                                              style: textTheme.bodyMedium
+                                                  ?.copyWith(
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 20.0,
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: SizedBox(
+                                  height: screenHeight * 0.5,
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          categoryItems[
+                                              state.categoryIndexTapped],
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.start,
+                                          softWrap: true,
+                                          maxLines: 2,
+                                          style: textTheme.bodyMedium?.copyWith(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w600,
+                                            color: AppColors.primaryColor,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: screenWidth * 0.5,
+                                          child: ListView.builder(
+                                              shrinkWrap: true,
+                                              physics:
+                                                  const ClampingScrollPhysics(),
+                                              itemCount:
+                                                  subCategoryItems.length,
+                                              itemBuilder: (context, index) {
+                                                return CheckboxListTile(
+                                                  title: Text(
+                                                    subCategoryItems[index],
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    softWrap: true,
+                                                    maxLines: 2,
+                                                    style: textTheme.bodyMedium
+                                                        ?.copyWith(
+                                                      fontSize: 16.0,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                  ),
+                                                  value: state.selectedListIndex !=
+                                                              null &&
+                                                          state
+                                                              .selectedListIndex!
+                                                              .contains(index)
+                                                      ? true
+                                                      : false,
+                                                  onChanged: (newValue) {
+                                                    var tempList =
+                                                        state.selectedListIndex;
+                                                    if (tempList != null) {
+                                                      if (newValue == true) {
+                                                        tempList.add(index);
+                                                        BlocProvider.of<
+                                                                    HomeCubit>(
+                                                                context)
+                                                            .onSubCategoryTapped(
+                                                                tempList);
+                                                      } else {
+                                                        tempList.remove(index);
+                                                        BlocProvider.of<
+                                                                    HomeCubit>(
+                                                                context)
+                                                            .onSubCategoryTapped(
+                                                                tempList);
+                                                      }
+                                                    } else {
+                                                      tempList = [index];
+                                                      BlocProvider.of<
+                                                                  HomeCubit>(
+                                                              context)
+                                                          .onSubCategoryTapped(
+                                                              tempList);
+                                                    }
+                                                  },
+                                                  controlAffinity:
+                                                      ListTileControlAffinity
+                                                          .leading, //  <-- leading Checkbox
+                                                );
+                                              }),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                const Divider(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: screenWidth * 0.4,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(12.0),
+                      margin: const EdgeInsets.all(20.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24.0),
+                        color: AppColors.primaryColor,
+                      ),
+                      child: Text(
+                        "show  results",
+                        style: textTheme.bodyLarge?.copyWith(
+                          color: AppColors.white,
+                          fontSize: FontSizes.size_16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )),
     );
   }
 }

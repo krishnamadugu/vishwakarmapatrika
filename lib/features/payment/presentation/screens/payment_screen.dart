@@ -1,15 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vishwakarmapatrika/core/constants/app_images.dart';
+import 'package:vishwakarmapatrika/core/utils/shared/shared_widgets.dart';
 
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/theme/app_colors.dart';
 import '../../../../core/constants/theme/border_radii.dart';
 import '../../../../core/constants/theme/font_size.dart';
 import '../../../../core/constants/theme/theme_constants.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
-class PaymentScreen extends StatelessWidget {
+class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
+
+  @override
+  State<PaymentScreen> createState() => _PaymentScreenState();
+}
+
+class _PaymentScreenState extends State<PaymentScreen> {
+  late final Razorpay _razorpay;
+
+  var options = {
+    'key': 'rzp_test_PTAvRUMV03ZtBK',
+    'amount': 50 * 100,
+    'name': 'Acme Corp.',
+    'external': {
+      'wallets': ['paytm'],
+    },
+    'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'}
+  };
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    showToastMsg(response.paymentId.toString());
+    Navigator.pop(context);
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    showToastMsg(response.message.toString());
+    Navigator.pop(context);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    showToastMsg(response.walletName.toString());
+    Navigator.pop(context);
+  }
+
+  @override
+  void initState() {
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _razorpay.clear();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +70,9 @@ class PaymentScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0x00fafafa),
         elevation: 0,
-        title: Text(
+        title: const Text(
           AppStrings.txtConfirmPayment,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: FontSizes.size_20,
             fontFamily: ThemeConstants.appLobsterTwoFontFamily,
             fontWeight: FontWeight.normal,
@@ -39,8 +88,8 @@ class PaymentScreen extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  margin: EdgeInsets.all(20.0),
-                  padding: EdgeInsets.all(20.0),
+                  margin: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
                   width: screenWidth,
                   height: screenHeight * 0.26,
                   decoration: BoxDecoration(
@@ -66,7 +115,7 @@ class PaymentScreen extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -86,7 +135,7 @@ class PaymentScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -106,7 +155,7 @@ class PaymentScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Padding(
+                        const Padding(
                             padding: EdgeInsets.symmetric(vertical: 8.0),
                             child: Divider()),
                         Row(
@@ -132,11 +181,11 @@ class PaymentScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
-                  margin: EdgeInsets.all(22.0),
+                  margin: const EdgeInsets.all(22.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -147,11 +196,11 @@ class PaymentScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       Container(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
                             border: Border.all()),
@@ -161,7 +210,7 @@ class PaymentScreen extends StatelessWidget {
                               AppImages.creditCardSvg,
                               color: AppColors.black,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
@@ -174,11 +223,11 @@ class PaymentScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Container(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
                             border: Border.all()),
@@ -188,7 +237,7 @@ class PaymentScreen extends StatelessWidget {
                               AppImages.upiIconSvg,
                               color: AppColors.black,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
@@ -206,22 +255,27 @@ class PaymentScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20.0),
-            Container(
-              width: screenWidth,
-              alignment: Alignment.center,
-              padding: EdgeInsets.all(20.0),
-              margin: EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.0),
-                color: AppColors.primaryColor,
-              ),
-              child: Text(
-                AppStrings.txtPayNow,
-                style: textTheme.bodyLarge?.copyWith(
-                  color: AppColors.white,
-                  fontSize: FontSizes.size_24,
-                  fontWeight: FontWeight.w600,
+            const SizedBox(height: 20.0),
+            InkWell(
+              onTap: () {
+                _razorpay.open(options);
+              },
+              child: Container(
+                width: screenWidth,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(20.0),
+                margin: const EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24.0),
+                  color: AppColors.primaryColor,
+                ),
+                child: Text(
+                  AppStrings.txtPayNow,
+                  style: textTheme.bodyLarge?.copyWith(
+                    color: AppColors.white,
+                    fontSize: FontSizes.size_24,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             )
